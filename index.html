@@ -1,0 +1,3171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>X-cano Herramientas de Inteligencia Artificial</title>
+    <style>
+        /* Reset y base */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #031d23, #000000, #042a25);
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 0.4em;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #a5ffdf;
+            text-align: center;
+            text-shadow: 2px 2px 8px #aedbe5;
+        }
+        h2 {
+            color: #5be7f1;
+            margin-top: 1.5em;
+            text-align: center;
+        }
+        h3 {
+            color: #9dffa7;
+            border-bottom: 2px solid #12f69b;
+            padding-bottom: 6px;
+            margin-top: 2em;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid #066272;
+            margin: 2em 0;
+        }
+        ul, ol {
+            max-width: 900px;
+            margin: 0 auto 2em auto;
+            padding-left: 1.2em;
+        }
+        ul li {
+            color: #70a1ff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        ol li {
+            margin-bottom: 2em;
+            background: rgba(36, 126, 134, 0.95);
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #fbfeff;
+        }
+        p {
+            max-width: 900px;
+            margin: 0 auto 1.5em auto;
+            font-size: 1rem;
+            color: #dcdde1;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        /* Encabezado imágenes */
+        .header-images {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 1.5em 0 2em 0;
+            flex-wrap: wrap;
+        }
+        .header-images img {
+            width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        /* Texto con imagen flotante */
+        .text-img-left {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 900px;
+            margin: 1em auto 2em auto;
+        }
+        .text-img-left img {
+            width: 210px;
+            flex-shrink: 0;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00d2ff;
+        }
+        .text-img-left p {
+            flex: 1;
+            color: #c8d6e5;
+            font-size: 1.05rem;
+        }
+        /* Tablas estilos */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 350px;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px #1e90ff88;
+        }
+        th, td {
+            border: 2px solid #fffafacc;
+            padding: 8px 12px;
+            text-align: center;
+            color: #040202;
+        }
+        th {
+            background: #48c776;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        td {
+            background: #8de6f2;
+        }
+
+        /* Lista de herramientas dentro de ol li */
+        ol li h3 {
+            color: #ffffff;
+            margin-bottom: 0.4em;
+        }
+        ol li p {
+            font-size: 0.95rem;
+            color: #dcdde1;
+        }
+        /* Logos en listas */
+        .logo-small {
+            width: 100px;
+            height: auto;
+            float: left;
+            margin-right: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px #f8f9f9;
+            transition: transform 0.3s ease;
+        }
+        .logo-small:hover {
+            transform: scale(1.1);
+        }
+        /*Responsive, para laptop, tablet, celulares */
+        @media (max-width: 900px) {
+            .text-img-left {
+                flex-direction: column;
+                align-items: center;
+            }
+            .text-img-left img {
+                width: 80%;
+                margin-bottom: 15px;
+            }
+            table {
+                max-width: 100%;
+            }
+            .header-images img {
+                width: 140px;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+            ul li {
+                font-size: 1rem;
+            }
+        }
+        /* Color para la lista principal */
+        ul#category-list li {
+            color: #baf018c6;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.6em;
+            list-style: none;
+            position: relative;
+            padding-left: 30px;
+        }
+        ul#category-list li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: #53ff58;
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        /* Footer simple */
+        footer {
+            text-align: center;
+            margin-top: 3em;
+            padding: 1em 0;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #fffbfb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra flotante superior -->
+<div class="barra-superior">
+    <div class="marquee">
+      <span>
+        👾 Bienvenido a X-cano Intellenge - Innovación con Inteligencia Artificial 🌐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        👾 Welcome to X-cano Intellenge - Innovation with artificial intelligence 🌐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        👾 Bienvenido a X-cano Intellenge - Innovación con Inteligencia Artificial 🌐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        👾 Welcome to X-cano Intellenge - Innovation with artificial intelligence 🌐
+      </span>
+    </div>
+  </div>
+  
+  <style>
+    .barra-superior {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(270deg, #d4d4d4, #5175ab, #586366, #497473, #9fb2ae);
+      background-size: 1000% 1000%;
+      animation: fondoAnimado 20s ease infinite;
+      color: #00ffc6;
+      z-index: 9999;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #00ffc6;
+      box-shadow: 0 3px 8px rgba(0, 255, 198, 0.3);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  
+    .marquee {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 20s linear infinite;
+      font-size: 24px;
+      font-weight: bold;
+      color: #000000ee;
+      text-shadow: 0 0 8px #00ffc6, 0 0 16px #00ffc6;
+    }
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    @keyframes fondoAnimado {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  
+    body {
+      margin: 0;
+      padding-top: 60px;
+    }
+  </style>
+  
+
+
+    <h1>HERRAMIENTAS DE<br>INTELIGENCIA ARTIFICIAL</h1>
+
+    <div class="header-images">
+        <img src="img/ai/robotfoco.png" alt="Robot con foco" />
+        <img src="img/ai/AI.jpg" alt="Imagen AI genérica" />
+    </div>
+    <hr>
+    <h2>Explora el mundo de la inteligencia Artificial</h2>
+    <hr>
+    <section style="max-width:900px; margin: 2em auto;">
+        <hr>
+        <h4>🔍Descubre más de 115 herramientas de Inteligencia Artificial💻</h4>
+        <p>
+            En esta página encontrarás un completo catálogo con más de 115 herramientas de inteligencia artificial, 
+            diseñadas para todo tipo de tareas y necesidades. Desde generación de texto, imágenes y videos, hasta 
+            asistentes personales, análisis de datos, programación y mucho más.
+            Cada herramienta está cuidadosamente seleccionada y categorizada para que puedas explorar fácilmente las 
+            soluciones que mejor se adaptan a tus proyectos y objetivos. Ya seas estudiante, profesional, emprendedor 
+            o simplemente curioso, aquí descubrirás cómo la IA puede potenciar tu creatividad, productividad y aprendizaje.
+            Explora, compara y elige las mejores herramientas que están transformando el mundo con tecnología inteligente.
+        </p>
+    </section>
+    <h2>CATEGORÍA DE HERRAMIENTAS:</h2>
+    <ul id="category-list" style="max-width: 600px; margin: 1em auto 2em auto;">
+        <li>IA GENERADORAS DE TEXTO 🧠📝</li>
+        <li>IA GENERADORAS DE IMÁGENES 👨‍🎨🖼️</li>
+        <li>IA GENERADORAS DE VOZ 🎙️</li>
+        <li>IA GENERADORAS DE VIDEO 🎬</li>
+        <li>IA DE ANÁLISIS Y PRODUCTIVIDAD 📊</li>
+        <li>IA DE EDUCACIÓN 📚</li>
+        <li>HERRAMIENTAS DE PROGRAMACIÓN 💻</li>
+        <li>ASISTENTES PERSONALES IA 🤖</li>
+        <li>IA DE IDIOMAS 🌐</li>
+    </ul>
+    <div style="padding: 20px; text-align: center;">
+        <label for="buscadorIA" style="font-size: 1.2em; font-weight: bold;">🔎 Buscar IA</label><br><br>
+        <input 
+          type="text" 
+          id="buscadorIA" 
+          placeholder="Escribe el nombre o tipo de IA..." 
+          style="padding: 10px; width: 70%; max-width: 500px; border-radius: 8px; border: 1px solid #ccc;"
+        />
+        <button 
+          onclick="filtrarIA()" 
+          style="padding: 10px 20px; margin-left: 10px; border-radius: 8px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+          Buscar
+        </button>
+    </div>
+    <!--alerta para los precios-->
+    <div style="max-width: 900px; margin: 2em auto;">
+        <div style="
+          background-color: #c1a2a2; /* gris claro */
+          color: rgb(72, 8, 8);
+          padding: 20px;
+          border-radius: 10px;
+          font-family: Arial, sans-serif;
+          font-size: 18px;
+          text-align: center;
+          box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        ">
+          ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️<br>
+          Los precios de muchas de las herramientas de inteligencia artificial pueden variar o no estar actualizados.<br>
+          Para obtener información precisa, visite sus páginas oficiales.<br>
+          ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+        </div>
+      </div>
+      
+      
+    <!-- Sección IA Generadoras de Texto -->
+    <section>
+        <h3>° IA GENERADORAS DE TEXTO 🧠📝:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/escritura.png" alt="IA generadora de texto" />
+            <p>
+                Las IA generadoras de texto son sistemas avanzados basados en modelos de lenguaje entrenados mediante 
+                técnicas de aprendizaje automático. Su objetivo principal es producir contenido textual
+                de forma automática, imitando el estilo y coherencia del lenguaje humano. Estos modelos 
+                han sido entrenados con grandes volúmenes de datos, como libros, artículos, conversaciones,
+                sitios web, redes sociales y mucho más, lo que les permite comprender el significado de 
+                las palabras, el contexto y las estructuras gramaticales de una gran variedad de temas.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>ChatGPT (OpenAI)</h3>
+                <img src="img/ias/ChatGPT.jpg" alt="ChatGPT Logo" class="logo-small" />
+                <p>
+                    ChatGPT es un modelo de lenguaje desarrollado por OpenAI basado en la arquitectura GPT 
+                    (Generative Pre-trained Transformer). Está diseñado para comprender y generar texto en 
+                    lenguaje natural con alta coherencia y fluidez. Entrenado con enormes cantidades de texto,
+                     puede responder preguntas, redactar ensayos, traducir idiomas, generar ideas creativas, 
+                     programar código y mantener conversaciones simulando el estilo humano. Su uso es muy versátil, 
+                     tanto para tareas profesionales como creativas. Existen distintas versiones, como GPT-3.5 (gratuita)
+                      y ChatGPT Plus (pago mensual con mejoras). Es una herramienta poderosa, pero requiere un uso responsable 
+                      debido a posibles sesgos o errores en sus respuestas.
+                </p>
+                <br>
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio 💳💰💰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GPT-3.5</td><td>Gratis</td></tr>
+                        <tr><td>ChatGPT Plus</td><td>$20/mes</td></tr>
+                        <tr><td>ChatGPT Pro</td><td>$200/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">Ir a ChatGPT</a></p>
+            </li>
+            <li>
+                <h3>DeepSeek</h3>
+                <img src="img/ias/deepseek.jpg" alt="DeepSeek Logo" class="logo-small" />
+                <p>
+                    DeepSeek es una plataforma de inteligencia artificial enfocada en la generación 
+                    avanzada de texto y búsqueda inteligente de información. Utiliza modelos de lenguaje
+                    para comprender consultas complejas y proporcionar respuestas precisas y contextuales.
+                    DeepSeek ayuda a automatizar la creación de contenido, optimizar investigaciones y 
+                    mejorar la productividad en distintas áreas, desde marketing hasta análisis de datos.
+                    Ofrece varias modalidades de uso, desde una versión gratuita básica hasta planes 
+                    profesionales y empresariales con características avanzadas y mayor capacidad. Es 
+                    una herramienta ideal para quienes buscan eficiencia en la gestión y generación de
+                    texto automatizado.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>DeepSeek</td><td>Gratis</td></tr>
+                        <tr><td>DeepSeek Pro</td><td>$20/mes</td></tr>
+                        <tr><td>DeepSeek Avanzado</td><td>$50-$100/mes</td></tr>
+                        <tr><td>DeepSeek Empresarial</td><td>$100-$500/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://deepseek.ai/" target="_blank" rel="noopener noreferrer">Ir a DeepSeek</a></p>
+            </li>
+            <li>
+                <h3>Meta AI</h3>
+                <img src="img/ias/meta.jpg" alt="Meta AI" class="logo-small"/>
+                <p>
+                    Meta AI es una plataforma avanzada de inteligencia artificial especializada en 
+                    generación y comprensión de texto. Utiliza modelos de lenguaje natural de última 
+                    generación para producir contenido coherente y relevante, ayudando a automatizar 
+                    tareas de redacción, responder preguntas y analizar datos textuales. Es ideal para 
+                    empresas que buscan mejorar la comunicación y eficiencia mediante IA escalable y 
+                    personalizable.
+                </p>
+                <br>
+                 <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Meta AI Texto Básico</td><td>Gratis</td></tr>
+                    <tr><td>Meta AI Texto Pro</td><td>$25/mes</td></tr>
+                    <tr><td>Meta AI Texto Empresarial</td><td>$100+/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://ai.facebook.com/" target="_blank" rel="noopener noreferrer">Ir a Meta AI</a></p>
+            </li>
+            <li>
+                <h3>Claude</h3>
+                <img src="img/ias/claude.jpg" alt="Claude AI" class="logo-small"/>
+                <p>
+                    Claude es un avanzado modelo de lenguaje desarrollado para generar texto 
+                    natural y altamente coherente, diseñado para asistir en tareas complejas 
+                    como redacción, análisis y conversación. Basado en inteligencia artificial 
+                    de última generación, Claude se especializa en entender contextos amplios y 
+                    matices del lenguaje humano, lo que lo hace ideal para aplicaciones profesionales 
+                    y creativas. Su arquitectura permite un aprendizaje continuo, mejorando la precisión 
+                    y adaptabilidad en múltiples idiomas. Además, es conocido por su capacidad para 
+                    producir respuestas detalladas, seguras y con un estilo conversacional fluido.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Claude Básico</td><td>Gratis</td></tr>
+                    <tr><td>Claude Pro</td><td>$25/mes</td></tr>
+                    <tr><td>Claude Empresarial</td><td>$120/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Ir a Claude</a></p>
+            </li>
+            <li>
+                <h3>GAMMA AI</h3>
+                <img src="img/ias/gamma.jpg" alt="GAMA AI" class="logo-small"/>
+                <p>
+                    GAMA es una plataforma avanzada de inteligencia artificial enfocada en la generación 
+                    de texto y automatización de tareas complejas. Utiliza modelos de lenguaje sofisticados 
+                    que permiten crear contenido creativo, informes detallados y análisis de datos en 
+                    múltiples idiomas. GAMA destaca por su capacidad para integrarse con diferentes sistemas 
+                    empresariales, facilitando la productividad y mejorando la toma de decisiones. Gracias a 
+                    su enfoque modular y escalable, es una herramienta flexible para usuarios desde 
+                    desarrolladores hasta grandes organizaciones.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>GAMMA Starter</td><td>Gratis</td></tr>
+                    <tr><td>GAMMA Pro</td><td>$30/mes</td></tr>
+                    <tr><td>GAMMA Enterprise</td><td>$150/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://gamma.app" target="_blank" rel="noopener noreferrer">Ir a GAMMA</a></p>
+            </li>
+            
+            <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI" class="logo-small"/>
+                <p>
+                    Qwen AI es un avanzado modelo de lenguaje desarrollado para generar texto natural 
+                    y coherente en múltiples idiomas. Su tecnología se basa en aprendizaje profundo para 
+                    tareas como redacción, traducción, resumen y asistencia conversacional, ofreciendo una 
+                    experiencia fluida y adaptable a diferentes contextos y necesidades profesionales.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Qwen </td><td>Gratis</td></tr>
+                    <tr><td>Qwen empresarial</td><td>precio no especificado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://qwen.ai/" target="_blank" rel="noopener noreferrer">Ir a Qwen AI</a></p>
+            </li>
+            <li>
+                <h3>ChatLLM</h3>
+                <img src="img/ias/chatllm.jpg" alt="ChatLLM" class="logo-small"/>
+                <p>
+                    ChatLLM es una plataforma de inteligencia artificial desarrollada por Abacus.AI que integra múltiples modelos de lenguaje avanzados, como GPT-4o, Sonnet-3.5 y Gemini 1.5. 
+                    Esta herramienta actúa como un asistente de investigación, permitiendo recopilar, analizar y sintetizar información de diversas fuentes confiables. 
+                    Es especialmente útil para estudiantes y profesionales que buscan apoyo en la redacción de tesis y trabajos académicos, ofreciendo funcionalidades como análisis de documentos PDF, ejecución de código y generación de contenido personalizado.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>ChatLLM Teams</td><td>$10/mes por usuario</td></tr>
+                </table>
+                <br>
+                <p><a href="https://chatllm.abacus.ai/" target="_blank" rel="noopener noreferrer">Ir a ChatLLM</a></p>
+            </li>
+            
+            <li>
+                <h3>Jasper</h3>
+                <img src="img/ias/jasper.jpg" alt="Jasper Logo" class="logo-small" />
+                <p>
+                    Jasper es una plataforma de inteligencia artificial especializada en la creación de 
+                    contenido de texto de alta calidad para marketing, blogs, redes sociales y más. Utiliza
+                    modelos avanzados de lenguaje para generar textos creativos, persuasivos y optimizados 
+                    para SEO en segundos. Jasper facilita la automatización del copywriting, ayudando a
+                    ahorrar tiempo y mejorar la productividad de equipos creativos y de marketing. Ofrece
+                    planes con prueba gratuita de 7 días y suscripciones pagas que varían según funciones
+                    y volumen de contenido. Es muy popular por su facilidad de uso, variedad de plantillas
+                    y soporte en varios idiomas.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Prueba gratuita</td><td>7 días</td></tr>
+                        <tr><td>Creator</td><td>$49/mes</td></tr>
+                        <tr><td>Team</td><td>$125/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.jasper.ai/" target="_blank" rel="noopener noreferrer">Ir a Jasper</a></p>
+            </li>
+            <li>
+                <h3>Copy.ai</h3>
+                <img src="img/ias/copy.jpg" alt="Copy.ai Logo" class="logo-small" />
+                <p>
+                    Copy.ai es una herramienta de inteligencia artificial diseñada para crear contenido 
+                    escrito de manera rápida y efectiva. Utiliza modelos de lenguaje avanzados para generar 
+                    textos para marketing, publicaciones en redes sociales, correos electrónicos, descripciones 
+                    de productos y más. Su interfaz es intuitiva y ofrece plantillas adaptadas a diversas 
+                    necesidades creativas. Copy.ai ofrece un plan gratuito con uso limitado y planes pagos 
+                    que brindan acceso a funciones premium y generación ilimitada. Es ideal para emprendedores, 
+                    creadores de contenido y equipos que buscan agilizar la producción de textos con calidad 
+                    profesional.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gratuito</td><td>Limitado</td></tr>
+                        <tr><td>Copy Pro</td><td>$49/mes</td></tr>
+                        <tr><td>Copy Growth</td><td>$249/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.copy.ai/" target="_blank" rel="noopener noreferrer">Ir a Copy.ai</a></p>
+            </li>
+            <li>
+                <h3>Writesonic</h3>
+                <img src="img/ias/writesonic.jpg" alt="Writesonic AI" class="logo-small"/>
+                <p>
+                    Writesonic es una plataforma de inteligencia artificial diseñada para ayudar en la 
+                    creación rápida y eficiente de contenido escrito. Utiliza tecnología avanzada de 
+                    procesamiento de lenguaje natural para generar textos de alta calidad, incluyendo 
+                    artículos, anuncios, descripciones de productos y más. Es muy valorado por su interfaz 
+                    fácil de usar y por ofrecer múltiples plantillas que facilitan la personalización. 
+                    Writesonic es ideal para marketers, bloggers y empresas que buscan optimizar su 
+                    producción de contenido sin sacrificar creatividad o precisión.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis limitado</td></tr>
+                    <tr><td>Plan Profesional</td><td>$19/mes</td></tr>
+                    <tr><td>Plan Empresarial</td><td>$99/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://writesonic.com" target="_blank" rel="noopener noreferrer">Ir a Writesonic</a></p>
+            </li>
+            <li>
+                <h3>Rytr</h3>
+                <img src="img/ias/rytr.png" alt="Rytr AI" class="logo-small"/>
+                <p>
+                    Rytr es una herramienta de inteligencia artificial que se especializa en 
+                    la generación rápida y creativa de texto para diversas necesidades, como blogs, 
+                    correos electrónicos, descripciones de productos y más. Utiliza modelos avanzados 
+                    de lenguaje natural para producir contenido coherente y atractivo en múltiples 
+                    idiomas. Rytr ofrece una interfaz sencilla y accesible, con opciones para ajustar 
+                    el tono y el estilo del texto. Es ideal para escritores, marketers y pequeñas 
+                    empresas que buscan acelerar la producción de contenido sin perder calidad.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Gratuito</td><td>limitado</td></tr>
+                    <tr><td>Plan Premium</td><td>$29/mes</td></tr>
+                    <tr><td>Plan Business</td><td>$99/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://rytr.me" target="_blank" rel="noopener noreferrer">Ir a Rytr</a></p>
+            </li>
+            <li>
+                <h3>HIX.AI</h3>
+                <img src="img/ias/hix.jpg" alt="HIX.AI" class="logo-small"/>
+                <p>
+                    HIX.AI es una plataforma de inteligencia artificial enfocada en la 
+                    generación automatizada de contenido creativo y funcional para marketing 
+                    digital, escritura y comunicación empresarial. Utiliza algoritmos 
+                    avanzados de procesamiento de lenguaje natural para producir textos 
+                    precisos, persuasivos y personalizados según las necesidades del usuario. 
+                    Además, HIX.AI incorpora herramientas para optimización SEO y análisis de 
+                    rendimiento del contenido generado, facilitando la mejora continua y el 
+                    impacto en audiencias específicas.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis limitado</td></tr>
+                    <tr><td>Plan Pro</td><td>$39/mes</td></tr>
+                    <tr><td>Plan Corporativo</td><td>$120/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://hix.ai" target="_blank" rel="noopener noreferrer">Ir a HIX.AI</a></p>
+            </li>
+            <li>
+                <h3>Neuroflash</h3>
+                <img src="img/ias/neuroflash.jpg" alt="Neuroflash" class="logo-small"/>
+                <p>
+                    Neuroflash es una IA especializada en la generación de contenido creativo 
+                    y marketing basado en inteligencia artificial. Su tecnología combina 
+                    procesamiento de lenguaje natural con análisis de datos para crear textos 
+                    persuasivos, anuncios publicitarios, y campañas personalizadas. Neuroflash 
+                    permite a los usuarios optimizar sus mensajes y mejorar la interacción con 
+                    el público objetivo, ofreciendo soluciones tanto para pequeñas empresas 
+                    como grandes corporativos. Además, incorpora herramientas para evaluar el 
+                    mpacto emocional y el rendimiento de los contenidos generados.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Starter</td><td>Gratis limitado</td></tr>
+                    <tr><td>Plan Pro</td><td>$49/mes</td></tr>
+                    <tr><td>Plan Enterprise</td><td>$150/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://neuroflash.com" target="_blank" rel="noopener noreferrer">Ir a Neuroflash</a></p>
+            </li>
+            <li>
+                <h3>ContentBot</h3>
+                <img src="img/ias/contentbot.png" alt="ContentBot" class="logo-small"/>
+                <p>
+                    ContentBot es una plataforma de inteligencia artificial diseñada para 
+                    generar contenido de alta calidad, optimizado para marketing digital, 
+                    blogs y redes sociales. Utiliza algoritmos avanzados de procesamiento 
+                    de lenguaje natural para crear textos que sean coherentes, atractivos y 
+                    adaptados a diferentes audiencias. ContentBot también ofrece funciones 
+                    para brainstorming, resúmenes automáticos y generación de ideas, 
+                    facilitando el trabajo creativo y aumentando la productividad de equipos 
+                    de contenido.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Gratuito</td><td>Limitado</td></tr>
+                    <tr><td>Plan Pro</td><td>$29/mes</td></tr>
+                    <tr><td>Plan Business</td><td>$99/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://contentbot.ai" target="_blank" rel="noopener noreferrer">Ir a ContentBot</a></p>
+            </li>
+            <li>
+                <h3>WriterZen</h3>
+                <img src="img/ias/writerzen.jpg" alt="WriterZen" class="logo-small"/>
+                <p>
+                    WriterZen es una plataforma de inteligencia artificial enfocada en la 
+                    creación de contenido SEO y marketing digital. Combina generación 
+                    automática de texto con herramientas de investigación de palabras clave 
+                    y análisis de competencia, facilitando la producción de artículos 
+                    optimizados para buscadores. WriterZen ayuda a los creadores de contenido 
+                    a mejorar la calidad, relevancia y alcance de sus textos, aumentando la 
+                    visibilidad en línea y atrayendo más tráfico orgánico. Además, ofrece 
+                    funciones de planificación y organización para simplificar el proceso 
+                    creativo.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis limitado</td></tr>
+                    <tr><td>Plan Pro</td><td>$39/mes</td></tr>
+                    <tr><td>Plan Enterprise</td><td>$99/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://writerzen.com" target="_blank" rel="noopener noreferrer">Ir a WriterZen</a></p>
+            </li>
+            <li>
+                <h3>Hypotenuse AI</h3>
+                <img src="img/ias/hypotenuse.jpg" alt="Hypotenuse AI" class="logo-small"/>
+                <p>
+                    Hypotenuse AI es una plataforma de generación de contenido basada en 
+                    inteligencia artificial que se especializa en la creación automática de 
+                    textos para ecommerce, blogs y descripciones de productos. Utiliza 
+                    algoritmos avanzados de procesamiento del lenguaje natural para producir 
+                    contenido relevante, coherente y optimizado para SEO, ayudando a los 
+                    negocios a escalar su producción de contenido rápidamente sin sacrificar 
+                    calidad. Además, Hypotenuse AI ofrece funciones de personalización para 
+                    adaptar los textos al tono y estilo deseado, facilitando campañas de 
+                    marketing digital efectivas.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Starter</td><td>$49/mes</td></tr>
+                    <tr><td>Plan Business</td><td>$149/mes</td></tr>
+                    <tr><td>Plan Enterprise</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://hypotenuse.ai" target="_blank" rel="noopener noreferrer">Ir a Hypotenuse AI</a></p>
+            </li>
+            <li>
+                <h3>Luzia AI</h3>
+                <img src="img/ias/luzia.jpg" alt="Luzia AI" class="logo-small"/>
+                <p>
+                    Luzia AI es un avanzado asistente conversacional impulsado por 
+                    inteligencia artificial, diseñado para entender el lenguaje natural 
+                    y mantener diálogos fluidos y contextuales. Utiliza modelos de 
+                    aprendizaje profundo para ofrecer respuestas precisas, asistencia 
+                    personalizada y soporte en múltiples idiomas. Es ideal para atención 
+                    al cliente, educación y automatización empresarial, ayudando a optimizar 
+                    la comunicación y mejorar la experiencia del usuario mediante interacciones 
+                    inteligentes y naturales.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis</td></tr>
+                    <tr><td>Plan Avanzado</td><td>$40/mes</td></tr>
+                    <tr><td>Plan Empresarial</td><td>$150/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.luziaai.com" target="_blank" rel="noopener noreferrer">Ir a Luzia AI</a></p>
+            </li>
+            <li>
+                <h3>Consensus</h3>
+                <img src="img/ias/consensus.jpg" alt="Consensus" class="logo-small"/>
+                <p>
+                    Consensus es una inteligencia artificial diseñada para buscar y sintetizar información de fuentes académicas y científicas confiables. 
+                    Utiliza procesamiento de lenguaje natural para generar resúmenes precisos y respuestas basadas en evidencias extraídas de artículos, 
+                    investigaciones y publicaciones verificadas. Es ideal para estudiantes, investigadores y profesionales que necesitan acceso rápido a 
+                    conocimientos validados y fuentes confiables.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Consensus Básico</td><td>Gratis</td></tr>
+                    <tr><td>Consensus Pro</td><td>$29/mes</td></tr>
+                    <tr><td>Consensus Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://consensus.app/" target="_blank" rel="noopener noreferrer">Ir a Consensus</a></p>
+            </li>
+            <li>
+                <h3>Scispace</h3>
+                <img src="img/ias/scispace.jpg" alt="Scispace" class="logo-small"/>
+                <p>
+                    Scispace es una plataforma de inteligencia artificial que facilita la lectura, búsqueda y comprensión de artículos científicos. 
+                    Utiliza modelos avanzados de procesamiento de lenguaje natural para extraer información relevante, responder preguntas basadas en 
+                    documentos académicos y generar resúmenes claros. Es ideal para investigadores, estudiantes y profesionales que necesitan acceder a 
+                    contenido científico de forma rápida y precisa.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Scispace Gratis</td><td>Gratis</td></tr>
+                    <tr><td>Scispace Pro</td><td>$15/mes</td></tr>
+                    <tr><td>Scispace Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.scispace.com/" target="_blank" rel="noopener noreferrer">Ir a Scispace</a></p>
+            </li>
+            <li>
+                <h3>Txyz</h3>
+                <img src="img/ias/txyz.png" alt="Txyz" class="logo-small"/>
+                <p>
+                    Txyz es una inteligencia artificial especializada en la generación de texto académico basada en fuentes confiables y verificadas. 
+                    Su tecnología permite crear contenidos precisos, bien fundamentados y adaptados a las necesidades de investigadores y estudiantes, 
+                    facilitando la elaboración de trabajos, resúmenes y análisis con respaldo científico.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Txyz Básico</td><td>Gratis</td></tr>
+                    <tr><td>Txyz Pro</td><td>$20/mes</td></tr>
+                    <tr><td>Txyz Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://txyz.ai/" target="_blank" rel="noopener noreferrer">Ir a Txyz</a></p>
+            </li>
+            <li>
+                <h3>Venice AI</h3>
+                <img src="img/ias/venice.jpg" alt="Venice AI" class="logo-small"/>
+                <p>
+                    Venice AI ofrece capacidades avanzadas de generación de texto, ideales para escribir artículos, ensayos, respuestas a preguntas, 
+                    resúmenes o cualquier tipo de contenido textual. Funciona directamente desde el navegador, sin almacenar tus datos, lo que 
+                    garantiza privacidad y rapidez. Es una opción poderosa y libre de censura para estudiantes, creadores de contenido e investigadores.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Venice Texto Básico</td><td>Gratis</td></tr>
+                    <tr><td>Venice Texto Pro</td><td>$15/mes</td></tr>
+                    <tr><td>Venice Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://venice.ai/" target="_blank" rel="noopener noreferrer">Ir a Venice AI</a></p>
+            </li>
+            <li>
+                <h3>Perplexity AI</h3>
+                <img src="img/ias/perplexity.jpg" alt="Perplexity AI" class="logo-small"/>
+                <p>
+                    Perplexity AI es un motor de búsqueda avanzado impulsado por inteligencia artificial que ofrece respuestas precisas y actualizadas a preguntas complejas. 
+                    Utiliza modelos de lenguaje avanzados para proporcionar información respaldada por fuentes confiables. 
+                    Ideal para investigadores, estudiantes y profesionales que requieren respuestas rápidas y fundamentadas.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Estándar</td><td>Gratis</td></tr>
+                    <tr><td>Profesional</td><td>$20/mes</td></tr>
+                    <tr><td>Enterprise Pro</td><td>$40/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer">Ir a Perplexity AI</a></p>
+            </li>
+            
+            
+            <li>
+                <h3>ChatPDF</h3>
+                <img src="img/ias/chatpdf.jpg" alt="ChatPDF" class="logo-small"/>
+                <p>
+                    ChatPDF es una herramienta de inteligencia artificial que permite a los usuarios cargar documentos PDF y 
+                    hacer preguntas o extraer información de manera rápida y precisa. Utiliza procesamiento avanzado de lenguaje natural 
+                    para entender y responder consultas basadas en el contenido del PDF, facilitando la revisión y análisis de documentos académicos, legales o técnicos.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>ChatPDF Gratis</td><td>Gratis</td></tr>
+                    <tr><td>ChatPDF Pro</td><td>$9/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.chatpdf.com/" target="_blank" rel="noopener noreferrer">Ir a ChatPDF</a></p>
+            </li>
+            <li>
+                <h3>NotebookLM (Google)</h3>
+                <img src="img/ias/notebooklm.jpg" alt="NotebookLM" class="logo-small"/>
+                <p>
+                    NotebookLM es una herramienta de inteligencia artificial desarrollada por Google 
+                    que actúa como un asistente de investigación personalizado. Permite a los usuarios 
+                    cargar documentos como PDFs, Google Docs, sitios web y videos de YouTube, y generar 
+                    resúmenes, explicaciones y respuestas basadas en el contenido proporcionado. Utilizando 
+                    el modelo de lenguaje Gemini, NotebookLM ofrece una comprensión profunda y precisa de la 
+                    información, facilitando la organización y el análisis de datos complejos.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>NotebookLM Gratis</td><td>Gratis</td></tr>
+                    <tr><td>NotebookLM Plus</td><td>Consultar en el sitio</td></tr>
+                </table>
+                <br>
+                <p><a href="https://notebooklm.google/" target="_blank" rel="noopener noreferrer">Ir a NotebookLM</a></p>
+            </li>
+            <li>
+                <h3>Juztina AI</h3>
+                <img src="img/ias/juztina.jpg" alt="Juztina AI" class="logo-small"/>
+                <p>
+                    Juztina AI es una inteligencia artificial especializada en el ámbito legal, diseñada para 
+                    asistir a abogados y profesionales jurídicos en la redacción de demandas, contratos y otros 
+                    documentos legales. Utiliza modelos avanzados de procesamiento de lenguaje natural para generar textos precisos, 
+                    claros y adaptados a la normativa vigente, facilitando el trabajo legal y ahorrando tiempo en 
+                    tareas administrativas.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis</td></tr>
+                    <tr><td>Plan Profesional</td><td>$29/mes</td></tr>
+                    <tr><td>Plan Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://juztina.ai/" target="_blank" rel="noopener noreferrer">Ir a Juztina AI</a></p>
+            </li>
+                        
+            
+            
+        </ol>
+    </section>
+
+    <!-- Sección IA Generadoras de Imágenes -->
+    <section>
+        <h3>° IA GENERADORAS DE IMÁGENES 👨‍🎨🖼️:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/image.jpg" alt="IA Generadora de Imágenes" />
+            <img src="img/ai/imagenes.jpg" alt="IA Generadora de Imágenes" />
+            <p>
+                Las IA generadoras de imágenes crean contenido visual original a partir de texto o referencias, utilizando modelos entrenados en grandes bases de datos de imágenes.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>ChatGPT</h3>
+                <img src="img/ias/ChatGPT.jpg" alt="ChatGPT" class="logo-small"/>
+                <p>
+                    ChatGPT de OpenAI integra la generación de imágenes mediante modelos como 
+                    DALL·E, permitiendo crear imágenes a partir de descripciones textuales. 
+                    Utiliza inteligencia artificial avanzada para transformar ideas en arte 
+                    visual, ideal para creativos, diseñadores y profesionales que buscan 
+                    generar contenido visual único con solo texto.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio 💳💰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GPT-3.5</td><td>Gratis</td></tr>
+                        <tr><td>ChatGPT Plus</td><td>$20/mes</td></tr>
+                        <tr><td>ChatGPT Pro</td><td>$200/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://openai.com/dall-e" target="_blank" rel="noopener noreferrer">Ir a DALL·E</a></p>
+            </li>
+            <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI Imagen" class="logo-small"/>
+                <p>
+                    Qwen AI integra modelos de difusión que permiten generar imágenes 
+                    digitales desde descripciones escritas. Puedes crear arte conceptual, 
+                    ilustraciones o gráficos únicos con tan solo unas palabras.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Modelo</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Qwen</td><td>Gratis</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://qwen.aliyun.com" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+            </li>
+            <li>
+                <h3>Venice AI</h3>
+                <img src="img/ias/venice.jpg" alt="Venice AI" class="logo-small"/>
+                <p>
+                    Venice AI es una herramienta de inteligencia artificial especializada en la generación de imágenes a partir de texto. 
+                    Utiliza modelos avanzados para transformar descripciones escritas en representaciones visuales creativas, realistas o artísticas. 
+                    Es ideal para diseñadores, artistas digitales y creadores de contenido visual que buscan inspiración o necesitan generar imágenes personalizadas 
+                    sin conocimientos de diseño gráfico.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Venice AI Básico</td><td>Gratis</td></tr>
+                    <tr><td>Venice AI Pro</td><td>$20/mes</td></tr>
+                    <tr><td>Venice AI Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.venice.ai/" target="_blank" rel="noopener noreferrer">Ir a Venice AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Picasso AI</h3>
+                <img src="img/ias/picasso.jpg" alt="Picaso AI" class="logo-small"/>
+                <p>
+                    Picaso AI es una avanzada plataforma de generación de imágenes basada en 
+                    inteligencia artificial que transforma descripciones textuales en obras 
+                    visuales de alta calidad. Utilizando técnicas de aprendizaje profundo y 
+                    redes neuronales generativas, Picaso AI permite a artistas, diseñadores 
+                    y creadores de contenido producir imágenes únicas, estilizadas y 
+                    personalizadas sin necesidad de habilidades avanzadas en diseño gráfico. 
+                    La herramienta facilita la creatividad al ofrecer diversas opciones de 
+                    estilo, desde arte realista hasta ilustraciones abstractas, siendo ideal 
+                    para publicidad, desarrollo de videojuegos, marketing digital y proyectos 
+                    creativos.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plan Básico</td><td>Gratis</td></tr>
+                        <tr><td>Plan Pro</td><td>$15/mes</td></tr>
+                        <tr><td>Plan Premium</td><td>$45/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.picassoia.com" target="_blank" rel="noopener noreferrer">Ir a Picasso AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Midjourney</h3>
+                <img src="img/ias/midjourney.jpg" alt="Midjourney" class="logo-small"/>
+                <p>
+                    Midjourney es un generador de imágenes basado en inteligencia artificial 
+                    que transforma textos en obras de arte digitales. Es muy popular por su 
+                    estilo artístico único y facilidad de uso, ideal para diseñadores y 
+                    artistas que buscan inspiración y creación rápida de imágenes de alta 
+                    calidad.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Trial</td><td>Gratis (limitado)</td></tr>
+                    <tr><td>Standard</td><td>$10/mes</td></tr>
+                    <tr><td>Pro</td><td>$30/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">Ir a Midjourney</a></p>
+            </li>
+            
+            <li>
+                <h3>DALL·E2 (OpenAI)</h3>
+                <img src="img/ias/dall-e2.jpg" alt="DALL·E" class="logo-small"/>
+                <p>
+                    DALL·E2 es un modelo de generación de imágenes de OpenAI que crea ilustraciones 
+                    y gráficos detallados a partir de descripciones textuales. Combina creatividad 
+                    y precisión para producir imágenes desde simples conceptos hasta escenas 
+                    complejas, revolucionando la creación visual digital.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>API básica</td><td>Gratis (limitado)</td></tr>
+                    <tr><td>API Pro</td><td>$20/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://openai.com/dall-e" target="_blank" rel="noopener noreferrer">Ir a DALL·E</a></p>
+            </li>
+            
+            <li>
+                <h3>Stable Diffusion</h3>
+                <img src="img/ias/Stable.png" alt="Stable Diffusion" class="logo-small"/>
+                <p>
+                    Stable Diffusion es un modelo de inteligencia artificial de código abierto que 
+                    permite generar imágenes de alta calidad y realismo a partir de texto. Es muy 
+                    popular por su flexibilidad, personalización y uso comunitario para crear arte 
+                    digital y contenido visual.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Uso libre</td><td>Gratis</td></tr>
+                    <tr><td>Servicios en la nube</td><td>Varía según proveedor</td></tr>
+                </table>
+                <br>
+                <p><a href="https://stability.ai" target="_blank" rel="noopener noreferrer">Ir a Stable Diffusion</a></p>
+            </li>
+            
+            <li>
+                <h3>Leonardo AI</h3>
+                <img src="img/ias/leonardo.jpg" alt="Leonardo AI" class="logo-small"/>
+                <p>
+                    Leonardo AI es un generador de imágenes que utiliza IA avanzada para producir 
+                    arte digital personalizado a partir de descripciones textuales, con un enfoque 
+                    en calidad y detalle para artistas, creadores y diseñadores que buscan imágenes 
+                    creativas y profesionales.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Básico</td><td>Gratis</td></tr>
+                    <tr><td>Plan Pro</td><td>$20/mes</td></tr>
+                    <tr><td>Plan Premium</td><td>$50/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://leonardo.ai" target="_blank" rel="noopener noreferrer">Ir a Leonardo AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Meta AI
+                </h3>
+                <img src="img/ias/meta.jpg" alt="Meta AI" class="logo-small"/>
+                <p>
+                    Meta AI desarrolla tecnologías de generación de imágenes usando IA para crear 
+                    gráficos realistas y artísticos. Sus sistemas están diseñados para mejorar la 
+                    creatividad y productividad digital, facilitando la generación visual para 
+                    múltiples sectores.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Generador Básico</td><td>Gratis</td></tr>
+                    <tr><td>Generador Avanzado</td><td>$30/mes</td></tr>
+                    <tr><td>Generador Empresarial</td><td>$150+/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://ai.facebook.com" target="_blank" rel="noopener noreferrer">Ir a Meta AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Artbreeder</h3>
+                <img src="img/ias/artbreeder.png" alt="Artbreeder" class="logo-small"/>
+                <p>
+                    Artbreeder es una plataforma de generación de imágenes que permite combinar y 
+                    modificar imágenes usando IA, facilitando la creación de arte digital único. 
+                    Se usa principalmente para diseño gráfico, creación de personajes y arte 
+                    conceptual.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Gratis</td><td>Limitado</td></tr>
+                    <tr><td>Pro</td><td>$10/mes</td></tr>
+                    <tr><td>Elite</td><td>$40/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.artbreeder.com" target="_blank" rel="noopener noreferrer">Ir a Artbreeder</a></p>
+            </li>
+            
+            <li>
+                <h3>RunwayML</h3>
+                <img src="img/ias/runwayml.png" alt="RunwayML" class="logo-small"/>
+                <p>
+                    RunwayML es una plataforma creativa que ofrece modelos de IA para generación de 
+                    imágenes y video. Permite a artistas y creadores utilizar herramientas avanzadas 
+                    para producción multimedia, facilitando procesos creativos con inteligencia 
+                    artificial.
+                </p>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Gratis</td><td>Limitado</td></tr>
+                    <tr><td>Creator</td><td>$15/mes</td></tr>
+                    <tr><td>Pro</td><td>$50/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://runwayml.com" target="_blank" rel="noopener noreferrer">Ir a RunwayML</a></p>
+            </li>
+            <li>
+                <h3>Canva AI</h3>
+                <img src="img/ias/canva.jpg" alt="Canva AI" class="logo-small"/>
+                <p>
+                    Canva AI es la integración de inteligencia artificial en la popular 
+                    plataforma de diseño Canva. Permite a los usuarios crear imágenes, 
+                    gráficos y contenido visual de manera rápida y sencilla, utilizando 
+                    funciones inteligentes como la generación automática de fondos, mejora 
+                    de imágenes, diseño asistido y creación de arte digital. Esta herramienta 
+                    facilita el trabajo de diseñadores profesionales y aficionados, 
+                    proporcionando recursos inteligentes que optimizan el proceso creativo 
+                    y permiten generar imágenes personalizadas para redes sociales, 
+                    presentaciones, marketing y más, todo sin necesidad de conocimientos 
+                    avanzados en diseño gráfico.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plan Gratuito</td><td>Gratis</td></tr>
+                        <tr><td>Plan Pro</td><td>$12.99/mes</td></tr>
+                        <tr><td>Plan Empresa</td><td>$30/mes por usuario</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.canva.com" target="_blank" rel="noopener noreferrer">Ir a Canva AI</a></p>
+            </li>
+            <li>
+                <h3>Microsoft Create</h3>
+                <img src="img/ias/microsoft_create.png" alt="Microsoft Create" class="logo-small"/>
+                <p>
+                    Microsoft Create es una herramienta de generación de imágenes impulsada 
+                    por inteligencia artificial que forma parte del ecosistema Microsoft 365. 
+                    Permite a usuarios crear imágenes, gráficos y contenido visual de alta 
+                    calidad utilizando modelos avanzados de IA para transformar ideas y texto 
+                    en imágenes realistas o artísticas. Es ideal para profesionales y empresas 
+                    que buscan agilizar la producción de material visual para presentaciones, 
+                    marketing y redes sociales, integrándose perfectamente con otras 
+                    aplicaciones de Microsoft para optimizar la productividad y creatividad.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Microsoft Create Básico</td><td>Gratis con Microsoft 365</td></tr>
+                        <tr><td>Microsoft Create Avanzado</td><td>$15/mes</td></tr>
+                        <tr><td>Microsoft Create Empresarial</td><td>Consultoría personalizada</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.microsoft.com/en-us/microsoft-create" target="_blank" rel="noopener noreferrer">Ir a Microsoft Create</a></p>
+            </li>
+            <li>
+                <h3>Monica AI</h3>
+                <img src="img/ias/monica.jpg" alt="Monica AI" class="logo-small"/>
+                <p>
+                    Monica AI es una plataforma innovadora de inteligencia artificial 
+                    especializada en la creación de contenido visual personalizado. Utiliza 
+                    redes neuronales avanzadas para generar imágenes artísticas y creativas 
+                    basadas en las indicaciones del usuario, ideal para diseñadores, creadores 
+                    de contenido y profesionales del marketing digital. Monica AI facilita la 
+                    creación rápida de imágenes únicas que pueden ser usadas en campañas 
+                    publicitarias, redes sociales o proyectos personales, ofreciendo 
+                    herramientas intuitivas para ajustar estilos, colores y temas, todo en una 
+                    interfaz accesible y amigable.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Monica AI Básico</td><td>Gratis</td></tr>
+                        <tr><td>Monica AI Pro</td><td>$29/mes</td></tr>
+                        <tr><td>Monica AI Empresarial</td><td>$99/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.monica.ai" target="_blank" rel="noopener noreferrer">Ir a Monica AI</a></p>
+            </li>
+            <li>
+                <h3>Pixlr</h3>
+                <img src="img/ias/pixlr.jpg" alt="Pixlr" class="logo-small"/>
+                <p>
+                    Pixlr es una poderosa herramienta de edición de imágenes basada en la web 
+                    que utiliza inteligencia artificial para facilitar la creación y mejora de 
+                    fotografías y gráficos digitales. Ofrece una interfaz intuitiva con 
+                    funciones avanzadas como eliminación de fondo automática, retoque 
+                    inteligente, filtros y efectos creativos. Ideal tanto para usuarios 
+                    principiantes como profesionales, Pixlr permite trabajar sin necesidad 
+                    de instalar software, ofreciendo acceso rápido y eficiente desde cualquier 
+                    dispositivo. Su IA acelera el flujo de trabajo creativo al automatizar 
+                    tareas complejas y mejorar la calidad visual.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pixlr Gratis</td><td>Gratis</td></tr>
+                        <tr><td>Pixlr Premium</td><td>$7.99/mes</td></tr>
+                        <tr><td>Pixlr Pro</td><td>$19.99/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://pixlr.com" target="_blank" rel="noopener noreferrer">Ir a Pixlr</a></p>
+            </li>
+            <li>
+                <h3>Microsoft Copilot</h3>
+                <img src="img/ias/microsoft_copilot.png" alt="Microsoft Copilot" class="logo-small"/>
+                <p>
+                    Microsoft Copilot es una avanzada herramienta de inteligencia artificial 
+                    integrada en aplicaciones de productividad como Microsoft 365, que ayuda 
+                    a los usuarios a automatizar tareas, generar contenido y mejorar la 
+                    eficiencia. Utiliza modelos de lenguaje avanzados para asistir en la 
+                    redacción de correos, creación de documentos, análisis de datos y 
+                    programación, facilitando el trabajo colaborativo y reduciendo el tiempo 
+                    empleado en tareas repetitivas. Copilot combina IA contextual con la 
+                    experiencia del usuario para ofrecer sugerencias personalizadas y mejorar 
+                    la toma de decisiones en entornos profesionales.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Copilot Básico</td><td>$15/mes</td></tr>
+                        <tr><td>Copilot Pro</td><td>$30/mes</td></tr>
+                        <tr><td>Copilot Empresarial</td><td>Personalizado</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://www.microsoft.com/en-us/microsoft-365/copilot" target="_blank" rel="noopener noreferrer">Ir a Microsoft Copilot</a></p>
+            </li>
+            <li>
+                <h3>Gemini AI</h3>
+                <img src="img/ias/gemini.png" alt="Gemini AI" class="logo-small"/>
+                <p>
+                    Gemini AI es una plataforma innovadora de google que combina inteligencia artificial 
+                    y aprendizaje automático para ofrecer soluciones avanzadas en generación 
+                    de imagenes, texto, análisis de datos y automatización de procesos. Desarrollada 
+                    para adaptarse a múltiples industrias, Gemini AI facilita la creación de 
+                    contenido coherente, respuestas inteligentes y optimización de tareas 
+                    complejas, mejorando la productividad y la toma de decisiones empresariales 
+                    mediante su interfaz intuitiva y capacidades versátiles.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gemini Básico</td><td>Gratis</td></tr>
+                        <tr><td>Gemini Pro</td><td>$29/mes</td></tr>
+                        <tr><td>Gemini Empresarial</td><td>$99+/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><a href="https://gemini.ai" target="_blank" rel="noopener noreferrer">Ir a Gemini AI</a></p>
+            </li>
+            
+            
+        </ol>
+    </section>
+    
+
+    <!-- Sección IA Generadoras de Voz -->
+    <section>
+        <h3>° IA GENERADORAS DE VOZ 🎙️:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/imageai.jpg" alt="IA Generadora de Voz" />
+            <p>
+                Las IA generadoras de voz transforman texto en audio con voces naturales 
+                y personalizables, usadas para narración, asistencia, y doblaje.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI Voz" class="logo-small"/>
+                <p>
+                    Con capacidades de texto a voz, Qwen AI puede convertir texto en 
+                    audios realistas, lo cual es útil para doblajes, locución de contenido 
+                    educativo o marketing auditivo.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Qwen</td><td>Gratis</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://qwen.aliyun.com" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+            </li>
+            <li>
+                <h3>Eleven Labs</h3>
+                <img src="img/ias/elevenlabs.jpg" alt="Eleven Labs" class="logo-small"/>
+                <p>
+                    Eleven Labs es una avanzada herramienta de inteligencia artificial especializada en la generación de voz natural a partir de texto. 
+                    Su tecnología de síntesis de voz permite crear audios realistas y personalizados, ajustando tono, emoción y estilo para diversas aplicaciones, 
+                    como audiolibros, podcasts, doblaje y asistentes de voz. Es ideal para creadores de contenido que buscan voces de alta calidad y flexibilidad.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Eleven Labs Gratis</td><td>Gratis</td></tr>
+                    <tr><td>Eleven Labs Pro</td><td>$19/mes</td></tr>
+                    <tr><td>Eleven Labs Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">Ir a Eleven Labs</a></p>
+            </li>
+            
+            <li>
+                <h3>Google Text-to-Speech</h3>
+                <img src="img/ias/googlecloud.jpeg" alt="Google Text-to-Speech" class="logo-small"/>
+                <p>
+                    Google Text-to-Speech es un avanzado servicio de conversión de texto a 
+                    voz que utiliza inteligencia artificial para generar voces naturales y 
+                    claras en múltiples idiomas y acentos. Está diseñado para integrarse 
+                    fácilmente en aplicaciones, ofreciendo soporte para lectores de pantalla, 
+                    asistentes virtuales, y servicios de accesibilidad. Su tecnología neural 
+                    mejora la fluidez y expresividad, proporcionando una experiencia auditiva 
+                    muy humana. Google ofrece opciones flexibles y escalables para 
+                    desarrolladores, con APIs que permiten personalizar voces y entonaciones.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Estándar</td><td>Gratis hasta 4M caracteres/mes</td></tr>
+                        <tr><td>Neural</td><td>$16 por 1M caracteres</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://cloud.google.com/text-to-speech" target="_blank" rel="noopener noreferrer">Ir a Google Text-to-Speech</a>
+            </li>
+            
+            <li>
+                <h3>Amazon Polly</h3>
+                <img src="img/ias/amazonpolly.jpeg" alt="Amazon Polly" class="logo-small"/>
+                <p>
+                    Amazon Polly es un servicio de texto a voz basado en inteligencia 
+                    artificial que convierte texto en discursos naturales y realistas. 
+                    Utiliza tecnología avanzada de redes neuronales para generar voces 
+                    expresivas en múltiples idiomas y acentos. Polly está diseñado para 
+                    aplicaciones como asistentes virtuales, narración de contenidos, sistemas 
+                    de accesibilidad y dispositivos IoT. Ofrece gran personalización, 
+                    con control sobre velocidad, tono y pronunciación, facilitando 
+                    experiencias auditivas dinámicas y personalizadas para usuarios de 
+                    todo el mundo.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Voz Estándar</td><td>$4.00 por 1M caracteres</td></tr>
+                        <tr><td>Voz Neural</td><td>$16.00 por 1M caracteres</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://aws.amazon.com/polly/" target="_blank" rel="noopener noreferrer">Ir a Amazon Polly</a>
+            </li>
+            
+            <li>
+                <h3>Microsoft Azure Speech</h3>
+                <img src="img/ias/microsoft_create.png" alt="Microsoft Azure Speech" class="logo-small"/>
+                <p>
+                    Microsoft Azure Speech es una potente plataforma de inteligencia artificial 
+                    que ofrece servicios de conversión de texto a voz, reconocimiento de voz y 
+                    traducción en tiempo real. Utiliza redes neuronales avanzadas para generar 
+                    voces naturales, personalizables en varios idiomas y acentos. Además, 
+                    permite transcribir audio con alta precisión y facilita la creación de 
+                    aplicaciones accesibles, asistentes virtuales y sistemas interactivos. 
+                    Su integración con Azure Cloud proporciona escalabilidad, seguridad y 
+                    herramientas de análisis para optimizar experiencias auditivas y mejorar 
+                    la productividad empresarial.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Voz Estándar</td><td>$4.00 por 1M caracteres</td></tr>
+                        <tr><td>Voz Neural</td><td>$16.00 por 1M caracteres</td></tr>
+                        <tr><td>Reconocimiento de Voz</td><td>$1.00 por hora de audio</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://azure.microsoft.com/en-us/services/cognitive-services/speech-services/" target="_blank" rel="noopener noreferrer">Ir a Microsoft Azure Speech</a>
+            </li>
+            
+            <li>
+                <h3>Descript Overdub</h3>
+                <img src="img/ias/descript.jpeg" alt="Descript Overdub" class="logo-small"/>
+                <p>
+                    Descript Overdub es una avanzada herramienta de inteligencia artificial 
+                    para la generación de voz que permite crear voces sintéticas realistas 
+                    basadas en muestras de voz personalizadas. Ideal para podcasters, creadores 
+                    de contenido y profesionales del audio, Overdub facilita la edición de 
+                    grabaciones simplemente escribiendo texto, manteniendo la naturalidad y 
+                    el tono de la voz original. Esta tecnología reduce el tiempo de producción 
+                    y mejora la accesibilidad al permitir correcciones y modificaciones rápidas 
+                    sin necesidad de regrabar.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plan Gratis</td><td>Limitado</td></tr>
+                        <tr><td>Pro</td><td>$12/mes</td></tr>
+                        <tr><td>Business</td><td>Contacto para precios</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.descript.com/overdub" target="_blank" rel="noopener noreferrer">Ir a Descript Overdub</a>
+            </li>
+            <li>
+                <h3>vidnoz AI</h3>
+                <img src="img/ias/vidnoz.jpeg" alt="vidnoz AI" class="logo-small"/>
+                <p>
+                    vidnoz AI es una plataforma avanzada de generación de voz que utiliza 
+                    inteligencia artificial para convertir texto en audio natural y expresivo. 
+                    Con tecnología de síntesis neural, vidnoz AI ofrece voces personalizables 
+                    para aplicaciones en audiolibros, anuncios, asistentes virtuales y más. 
+                    Su interfaz intuitiva facilita la creación rápida de contenidos de audio 
+                    de alta calidad, ayudando a mejorar la accesibilidad y la experiencia del 
+                    usuario en diversas plataformas digitales.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plan Básico</td><td>Gratis con limitaciones</td></tr>
+                        <tr><td>Plan Pro</td><td>$15/mes</td></tr>
+                        <tr><td>Plan Empresarial</td><td>Personalizado</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.vidnoz.com" target="_blank" rel="noopener noreferrer">Ir a vidnoz AI</a>
+            </li>
+            <li>
+                <h3>Canva Generador de Voz IA</h3>
+                <img src="img/ias/canva.jpg" alt="Canva Generador de Voz IA" class="logo-small"/>
+                <p>
+                    El generador de voz IA de Canva es una herramienta avanzada que convierte 
+                    texto escrito en audio con voces naturales y realistas. Utiliza algoritmos 
+                    de aprendizaje profundo para imitar la voz humana, incluyendo tono, 
+                    emoción y entonación, permitiendo crear narraciones auténticas y 
+                    personalizadas. Integrado directamente en la plataforma Canva, facilita 
+                    la creación de contenido multimedia como videos, presentaciones y redes 
+                    sociales, sin necesidad de conocimientos técnicos especializados. Además, 
+                    ofrece opciones de personalización en velocidad, tono y estilo de la voz, 
+                    adaptándose a diferentes tipos de proyectos creativos.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Gratuito</td><td>Hasta 1,000 caracteres por conversión</td></tr>
+                        <tr><td>Pro</td><td>Incluido en Canva Pro</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.canva.com/es_co/funciones/generador-de-voces-ia/" target="_blank" rel="noopener noreferrer">Ir a Canva</a>
+            </li>
+            
+            
+        </ol>
+    </section>    
+
+    <!-- Sección IA Generadoras de Video -->
+    <section>
+        <h3>° IA GENERADORAS DE VIDEO 🎬:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/videoai.jpg" alt="IA Generadora de Video" />
+            <p>
+                Las IA generadoras de video producen clips a partir de texto, imágenes 
+                o secuencias, automatizando edición y creación audiovisual.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI Video" class="logo-small"/>
+                <p>
+                    Qwen AI también puede generar contenido visual y multimedia. Su motor 
+                    de video utiliza IA avanzada para crear animaciones y videos a partir 
+                    de texto o guiones, ideal para marketing, educación y redes sociales.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Qwen</td><td>Gratis</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://qwen.aliyun.com" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+            </li>
+            <li>
+                <h3>Gemini (con Veo 3)</h3>
+                <img src="img/ias/gemini.png" alt="Gemini" class="logo-small"/>
+                <p>
+                    Gemini es la plataforma de inteligencia artificial avanzada de Google, que integra herramientas como Veo 3 para la generación de videos.
+                    A través de una interfaz intuitiva y capacidades de comprensión multimodal, permite a los usuarios crear videos de alta calidad 
+                    a partir de texto o imágenes. Gracias al modelo Veo 3 de DeepMind, los videos generados pueden incluir movimiento realista, efectos visuales
+                    y sonido sincronizado. Es ideal para creadores de contenido, educadores y equipos de marketing.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan Gemini</th><th>Acceso a Veo 3</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Gemini Básico</td><td>No</td><td>Gratis</td></tr>
+                    <tr><td>Gemini Pro</td><td>Limitado</td><td>$20/mes</td></tr>
+                    <tr><td>Gemini Ultra</td><td>Completo</td><td>$249/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://gemini.google/overview/video-generation/" target="_blank" rel="noopener noreferrer">Ir a Gemini con Veo 3</a></p>
+            </li>
+            <li>
+                <h3>Hedra AI</h3>
+                <img src="img/ias/hedra.jpg" alt="Hedra AI" class="logo-small"/>
+                <p>
+                    Hedra AI es una plataforma de inteligencia artificial que transforma imágenes estáticas en videos animados con personajes que hablan, cantan o expresan emociones de manera realista. 
+                    Utiliza tecnología avanzada de sincronización labial y expresiones faciales para crear contenido dinámico y atractivo. 
+                    Es ideal para creadores de contenido, educadores y profesionales del marketing que buscan dar vida a sus ideas sin necesidad de conocimientos técnicos avanzados.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Hedra AI Gratis</td><td>Gratis (hasta 5 videos cortos por día)</td></tr>
+                    <tr><td>Hedra AI Pro</td><td>$19/mes</td></tr>
+                    <tr><td>Hedra AI Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.hedra-ai.com/" target="_blank" rel="noopener noreferrer">Ir a Hedra AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Pika</h3>
+                <img src="img/ias/pika.jpg" alt="Pika" class="logo-small"/>
+                <p>
+                    Pika es una herramienta de inteligencia artificial especializada en la generación automática de videos a partir de texto o guiones. 
+                    Utiliza modelos avanzados para crear contenido audiovisual de manera rápida y sencilla, integrando imágenes, animaciones y voz, 
+                    ideal para marketing, presentaciones y creación de contenido digital sin necesidad de experiencia en edición.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Pika Básico</td><td>Gratis</td></tr>
+                    <tr><td>Pika Pro</td><td>$29/mes</td></tr>
+                    <tr><td>Pika Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.pika.ai/" target="_blank" rel="noopener noreferrer">Ir a Pika</a></p>
+            </li>
+            <li>
+                <h3>Humva AI</h3>
+                <img src="img/ias/humva.jpg" alt="Humva AI" class="logo-small"/>
+                <p>
+                    Humva AI es una plataforma innovadora que permite crear videos personalizados utilizando avatares generados por inteligencia artificial. 
+                    Con solo subir una foto, puedes generar un avatar que presentará tu guion o voz en off, ideal para contenido en redes sociales, marketing, educación y más. 
+                    La tecnología avanzada de sincronización labial asegura una presentación natural y profesional, sin necesidad de equipo de grabación ni habilidades de actuación.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Plan Estándar</td><td>$19/mes</td></tr>
+                    <tr><td>Plan Ilimitado</td><td>$62/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://humva.com/" target="_blank" rel="noopener noreferrer">Ir a Humva AI</a></p>
+            </li>
+            
+            <li>
+                <h3>Sand AI</h3>
+                <img src="img/ias/sand.jpg" alt="Sand AI" class="logo-small"/>
+                <p>
+                    Sand AI, mediante su modelo Magi-1, es una plataforma de inteligencia artificial que genera videos de alta calidad a partir de imágenes estáticas. 
+                    Utiliza una arquitectura avanzada para crear videos realistas y animados, ofreciendo control preciso sobre la duración y contenido del video. 
+                    Es ideal para creadores de contenido, cineastas y equipos de marketing que buscan transformar fotos en narrativas visuales dinámicas.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Acceso Básico</td><td>Gratis</td></tr>
+                    <tr><td>Acceso Avanzado</td><td>Consultar en el sitio</td></tr>
+                </table>
+                <br>
+                <p><a href="https://sand.ai/magi" target="_blank" rel="noopener noreferrer">Ir a Sand AI (Magi-1)</a></p>
+            </li>
+            
+            <li>
+                <h3>Canva</h3>
+                <img src="img/ias/canva.jpg" alt="Canva" class="logo-small"/>
+                <p>
+                    Canva es una plataforma de diseño gráfico en línea que también incluye 
+                    potentes herramientas de generación de video con IA. 
+                    Permite a los usuarios crear videos profesionales fácilmente mediante 
+                    plantillas personalizables, animaciones automáticas y herramientas 
+                    de edición intuitivas. Su tecnología IA ayuda a optimizar contenido 
+                    audiovisual, facilitando la creación rápida para marketing, educación 
+                    o redes sociales. Además, ofrece una integración fluida con otros recursos multimedia, 
+                    haciendo que la producción de video sea accesible para principiantes y profesionales.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Plan Gratuito</td><td>Gratis</td></tr>
+                        <tr><td>Pro</td><td>$12.99/mes</td></tr>
+                        <tr><td>Empresa</td><td>$30/usuario/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Ir a Canva</a>
+            </li>
+            
+            <li>
+                <h3>Pictory AI</h3>
+                <img src="img/ias/pictory.jpg" alt="Pictory AI" class="logo-small"/>
+                <p>
+                    Pictory AI es una plataforma avanzada que utiliza inteligencia artificial 
+                    para transformar texto, artículos, guiones y grabaciones de voz en videos 
+                    profesionales en minutos. Diseñada para creadores de contenido, 
+                    especialistas en marketing, educadores y pequeñas empresas, Pictory 
+                    facilita la creación de videos atractivos sin necesidad de experiencia 
+                    en edición. Entre sus funciones destacan la generación automática de 
+                    subtítulos, narración con voces realistas, integración con bibliotecas 
+                    de medios libres de derechos y herramientas de edición colaborativa. Ideal 
+                    para contenido en redes sociales, cursos en línea y presentaciones 
+                    corporativas.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Plan</th><th>Precio 💳💰</th><th>Minutos de video al mes</th><th>Voz IA estándar</th><th>Voz IA avanzada</th><th>Funciones</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Starter</td><td>$19/mes</td><td>200</td><td>Ilimitada</td><td>120 min</td><td>Herramientas básicas de IA</td></tr>
+                        <tr><td>Professional</td><td>$39/mes</td><td>600</td><td>Ilimitada</td><td>240 min</td><td>Herramientas avanzadas de IA</td></tr>
+                        <tr><td>Teams</td><td>$99/mes</td><td>1,800</td><td>Ilimitada</td><td>240 min</td><td>Colaboración en equipo, API</td></tr>
+                        <tr><td>Enterprise</td><td>Personalizado</td><td>Personalizado</td><td>Ilimitada</td><td>Personalizado</td><td>Consultoría dedicada, soporte prioritario</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://pictory.ai/" target="_blank" rel="noopener noreferrer">Ir a Pictory AI</a>
+            </li>
+            
+            <li>
+                <h3>Lumen5</h3>
+                <img src="img/ias/lumen5.jpg" alt="Lumen5" class="logo-small"/>
+                <p>
+                    Lumen5 es una plataforma de creación de videos impulsada por inteligencia 
+                    artificial que permite a los usuarios transformar fácilmente contenido 
+                    textual, como artículos y publicaciones de blogs, en videos atractivos. 
+                    Su interfaz intuitiva de arrastrar y soltar facilita la personalización 
+                    de escenas, la adición de texto, imágenes y música, sin necesidad de 
+                    habilidades técnicas avanzadas. Lumen5 es ideal para creadores de 
+                    contenido, equipos de marketing y educadores que buscan producir videos 
+                    de alta calidad de manera rápida y eficiente.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Plan</th><th>Precio 💳💰</th><th>Resolución</th><th>Voz IA</th><th>Acceso a Medios</th><th>Funciones Destacadas</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Gratuito</td><td>Gratis</td><td>720p</td><td>Ilimitada</td><td>Limitado</td><td>Marca de agua en videos</td></tr>
+                        <tr><td>Básico</td><td>$19/mes</td><td>720p</td><td>20 min/mes</td><td>Acceso básico</td><td>Sin marca de agua</td></tr>
+                        <tr><td>Starter</td><td>$59/mes</td><td>1080p</td><td>50 min/mes</td><td>50M+ medios</td><td>Colores y fuentes personalizadas</td></tr>
+                        <tr><td>Profesional</td><td>$149/mes</td><td>1080p</td><td>500M+ medios</td><td>Subidas propias</td><td>Plantillas y kits de marca</td></tr>
+                        <tr><td>Enterprise</td><td>Personalizado</td><td>1080p</td><td>Ilimitada</td><td>Ilimitado</td><td>Soporte dedicado</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.lumen5.com/" target="_blank" rel="noopener noreferrer">Ir a Lumen5</a>
+            </li>
+            
+            <li>
+                <h3>Runway ML</h3>
+                <img src="img/ias/runwayml.png" alt="Runway ML" class="logo-small"/>
+                <p>
+                    Runway ML es una plataforma avanzada de generación de videos mediante 
+                    inteligencia artificial que permite crear contenido audiovisual a partir 
+                    de texto, imágenes o clips de video. Con modelos como Gen-4, ofrece 
+                    capacidades para generar escenas consistentes y personajes coherentes en 
+                    múltiples tomas, facilitando la narrativa visual. Es ideal para creadores 
+                    de contenido, cineastas y profesionales del marketing que buscan producir 
+                    videos de alta calidad sin necesidad de experiencia en edición. Además, 
+                    proporciona herramientas de edición colaborativa y acceso a bibliotecas 
+                    de medios libres de derechos.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Gratuito</td>
+                            <td>Gratis</td>
+                        </tr>
+                        <tr>
+                            <td>Standard</td>
+                            <td>$15/mes</td>
+                        </tr>
+                        <tr>
+                            <td>Pro</td>
+                            <td>$35/mes</td>
+                        <tr>
+                            <td>Enterprise</td>
+                            <td>Personalizado</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://runwayml.com/" target="_blank" rel="noopener noreferrer">Ir a Runway ML</a>
+            </li>
+            <li>
+                <h3>Clipchamp</h3>
+                <img src="img/ias/clipchamp.jpg" alt="Clipchamp" class="logo-small"/>
+                <p>
+                    Clipchamp es una plataforma de edición de video en línea propiedad de 
+                    Microsoft, que permite a los usuarios crear contenido de manera sencilla 
+                    con herramientas potentes y plantillas prediseñadas. Incorpora funciones 
+                    inteligentes asistidas por IA como la generación automática de subtítulos, 
+                    eliminación de silencios y edición rápida. Es ideal tanto para 
+                    principiantes como para creadores profesionales que buscan eficiencia 
+                    sin instalar software pesado.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Gratis</td><td>$0</td></tr>
+                        <tr><td>Essential</td><td>$11/mes</td></tr>
+                        <tr><td>Business</td><td>$20/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.clipchamp.com" target="_blank"rel="noopener noreferrer">Ir a Clipchamp</a>
+            </li>
+            
+            <li>
+                <h3>Revid AI</h3>
+                <img src="img/ias/revid.jpg" alt="Revid AI" class="logo-small"/>
+                <p>
+                    Revid AI es una herramienta de generación de video basada en inteligencia 
+                    artificial que permite transformar texto, artículos o guiones en videos 
+                    profesionales automáticamente. Utiliza algoritmos de procesamiento de 
+                    lenguaje natural y edición automatizada para agregar voces, imágenes y 
+                    efectos, facilitando la creación de contenido para marketing, redes 
+                    sociales y presentaciones.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Básico</td><td>Gratis</td></tr>
+                        <tr><td>Pro</td><td>$15/mes</td></tr>
+                        <tr><td>Empresa</td><td>$49/mes</td></tr>
+                    </tbody>
+                </table>
+                <br>
+                <a href="https://www.revid.ai" target="_blank"rel="noopener noreferrer">Ir a Revid AI</a>
+            </li>
+            
+            <li>
+                <h3>Renderforest</h3>
+                <img src="img/ias/renderforest.jpg" alt="Renderforest" class="logo-small"/>
+                <p>
+                    Renderforest es una plataforma todo en uno para la creación de videos, 
+                    logotipos, sitios web y presentaciones, que incorpora inteligencia 
+                    artificial para ayudar a generar contenido visual atractivo rápidamente. 
+                    Con una amplia gama de plantillas y una interfaz fácil de usar, es ideal 
+                    para negocios, educadores y creadores de contenido que buscan resultados 
+                    profesionales sin necesidad de conocimientos técnicos.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Gratis</td><td>$0</td></tr>
+                        <tr><td>Lite</td><td>$9.99/mes</td></tr>
+                        <tr><td>Pro</td><td>$19.99/mes</td></tr>
+                        <tr><td>Business</td><td>$29.99/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://www.renderforest.com" target="_blank"rel="noopener noreferrer">Ir a Renderforest</a>
+            </li>
+            
+            <li>
+                <h3>InVideo</h3>
+                <img src="img/ias/invideo.jpg" alt="InVideo" class="logo-small"/>
+                <p>
+                    InVideo es una potente plataforma de edición de video con funciones de 
+                    inteligencia artificial que permite a los usuarios convertir textos en 
+                    videos rápidamente. Ofrece plantillas prediseñadas, banco multimedia, y 
+                    asistentes automáticos para generación de voz y edición, siendo una 
+                    solución eficiente para marketing digital, presentaciones y contenido 
+                    para redes sociales.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Gratis</td><td>$0</td></tr>
+                        <tr><td>Plus</td><td>$20/mes</td></tr>
+                        <tr><td>Max</td><td>$48/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://invideo.io" target="_blank"rel="noopener noreferrer">Ir a InVideo</a>
+            </li>
+            
+            
+        </ol>
+    </section>    
+
+    <!-- Sección IA de Análisis y Productividad -->
+    <section>
+        <h3>° IA DE ANÁLISIS Y PRODUCTIVIDAD 📊:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/produc.jpg" alt="IA de Análisis y Productividad" />
+            <p>
+                Las IA de análisis y productividad optimizan procesos, generan reportes 
+                automáticos, analizan datos complejos y ayudan en la toma de decisiones.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>Tableau</h3>
+                <img src="img/ias/tableau.jpg" alt="Tableau" class="logo-small" />
+                <p>
+                  Tableau es una plataforma líder en inteligencia empresarial que permite 
+                  visualizar, analizar y comprender datos a través de dashboards interactivos. 
+                  Su facilidad de uso y potentes capacidades de integración la convierten en 
+                  una herramienta clave en el análisis de grandes volúmenes de información 
+                  para la toma de decisiones estratégicas.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Tableau Public</td><td>Gratis</td></tr>
+                    <tr><td>Tableau Creator</td><td>$70/mes</td></tr>
+                    <tr><td>Tableau Explorer</td><td>$42/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.tableau.com" target="_blank"rel="noopener noreferrer">Ir a Tableau</a>
+              </li>
+              
+              <li>
+                <h3>Microsoft Power BI</h3>
+                <img src="img/ias/powerbi.jpg" alt="Power BI" class="logo-small" />
+                <p>
+                  Power BI es una solución de análisis de datos de Microsoft que permite 
+                  transformar información cruda en insights interactivos mediante 
+                  visualizaciones, informes y dashboards. Es ampliamente utilizada 
+                  en entornos empresariales por su integración con otras herramientas 
+                  de Microsoft como Excel y Azure.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Power BI Desktop</td><td>Gratis</td></tr>
+                    <tr><td>Power BI Pro</td><td>$10/mes</td></tr>
+                    <tr><td>Power BI Premium</td><td>$20/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://powerbi.microsoft.com/" target="_blank"rel="noopener noreferrer">Ir a Power BI</a>
+              </li>
+              
+              <li>
+                <h3>Zoho Analytics</h3>
+                <img src="img/ias/zoho.jpg" alt="Zoho Analytics" class="logo-small" />
+                <p>
+                  Zoho Analytics es una herramienta de inteligencia empresarial que permite 
+                  importar, analizar y visualizar datos con facilidad. Ofrece paneles 
+                  personalizables, automatización y colaboración, todo en una plataforma 
+                  en la nube ideal tanto para pequeñas como grandes empresas.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Free</td><td>Gratis</td></tr>
+                    <tr><td>Basic</td><td>$30/mes</td></tr>
+                    <tr><td>Premium</td><td>$145/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.zoho.com/analytics/" target="_blank"rel="noopener noreferrer">Ir a Zoho Analytics</a>
+              </li>
+              
+              <li>
+                <h3>Notion AI</h3>
+                <img src="img/ias/notion.jpg" alt="Notion AI" class="logo-small" />
+                <p>
+                  Notion AI es la función de inteligencia artificial integrada en Notion, 
+                  diseñada para ayudar a redactar, resumir, traducir y generar contenido 
+                  dentro de tus espacios de trabajo. Es especialmente útil para la productividad 
+                  personal y profesional en tareas como organización, redacción y gestión de 
+                  información.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Notion Free</td><td>Gratis</td></tr>
+                    <tr><td>Notion AI</td><td>$10/mes</td></tr>
+                    <tr><td>Plan Pro + AI</td><td>$18/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.notion.so/product/ai" target="_blank"rel="noopener noreferrer">Ir a Notion AI</a>
+              </li>
+              
+              <li>
+                <h3>INESDI</h3>
+                <img src="img/ias/inesdi.jpg" alt="INESDI" class="logo-small" />
+                <p>
+                  INESDI es una institución educativa especializada en transformación digital, 
+                  que ofrece formación en áreas como inteligencia artificial, big data, marketing 
+                  digital y análisis de datos. Aunque no es una IA en sí misma, brinda acceso a 
+                  herramientas y conocimientos clave para aplicar IA en contextos de productividad 
+                  y negocios.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Curso</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Curso de IA para Negocios</td><td>$400</td></tr>
+                    <tr><td>Diplomado en IA</td><td>$1,800</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.inesdi.com" target="_blank"rel="noopener noreferrer">Ir a INESDI</a>
+              </li>
+              
+              <li>
+                <h3>Excel + IA</h3>
+                <img src="img/ias/exelai.jpg" alt="Excel IA" class="logo-small" />
+                <p>
+                  Microsoft Excel ha integrado funcionalidades de inteligencia artificial, como 
+                  análisis predictivo, sugerencias automáticas y visualización de datos inteligentes. 
+                  Combinado con Power Query y complementos, Excel se transforma en una herramienta 
+                  potente para análisis de datos y automatización de tareas.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Excel Online</td><td>Gratis</td></tr>
+                    <tr><td>Excel 365</td><td>$6.99/mes</td></tr>
+                    <tr><td>Excel Empresarial</td><td>$12.50/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.microsoft.com/excel" target="_blank"rel="noopener noreferrer">Ir a Excel</a>
+              </li>              
+        </ol>
+    </section>
+    
+    <!-- Sección IA de Educación -->
+    <section>
+        <h3>° IA DE EDUCACIÓN 📚:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/edu.jpg" alt="IA de Educación" />
+            <img src="img/ai/educacion.png" alt="IA de Educación" />
+            <p>
+                Las IA educativas personalizan el aprendizaje, ofrecen tutorías inteligentes 
+                y facilitan la creación de contenidos didácticos.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+            <h3>Khan Academy</h3>
+            <img src="img/ias/khanacademy.jpg" alt="Khan Academy" class="logo-small" />
+            <p>
+                Khan Academy es una plataforma educativa gratuita que utiliza IA para 
+                personalizar el aprendizaje. Ofrece contenido en matemáticas, ciencias, 
+                programación y más, con seguimiento de progreso y retroalimentación en 
+                tiempo real. Es ideal tanto para estudiantes como para maestros que buscan 
+                reforzar conceptos de forma dinámica y adaptativa.
+            </p>
+            <br>
+            <table>
+                <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                <tr><td>Estudiantes</td><td>Gratis</td></tr>
+                <tr><td>Maestros</td><td>Gratis</td></tr>
+                <tr><td>Donaciones (opcional)</td><td>Variable</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://www.khanacademy.org" target="_blank"rel="noopener noreferrer">Ir a Khan Academy</a>
+            </li>
+            <li>
+                <h3>StudyX AI</h3>
+                <img src="img/ias/studyx.jpg" alt="StudyX AI" class="logo-small"/>
+                <p>
+                    StudyX AI es una plataforma de inteligencia artificial diseñada para estudiantes, que ofrece asistencia personalizada en tareas y estudios. 
+                    Permite a los usuarios ingresar preguntas mediante texto, imágenes o archivos PDF, y proporciona soluciones detalladas paso a paso. 
+                    Además, cuenta con herramientas como generador de notas, resumen de videos y documentos, y soporte en múltiples materias, facilitando el aprendizaje y la comprensión de conceptos complejos.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Gratuito</td><td>Gratis</td></tr>
+                    <tr><td>Plus</td><td>$29.99/mes</td></tr>
+                    <tr><td>Pro</td><td>$49.99/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://studyx.ai/" target="_blank" rel="noopener noreferrer">Ir a StudyX AI</a></p>
+            </li>
+            
+              
+            <li>
+            <h3>Coursera</h3>
+            <img src="img/ias/coursera.jpg" alt="Coursera" class="logo-small" />
+            <p>
+                Coursera ofrece cursos online de universidades y empresas líderes a nivel 
+                mundial, y aplica IA para recomendar contenidos, personalizar trayectorias 
+                de aprendizaje y evaluar el progreso. Permite acceder a certificaciones 
+                profesionales, grados académicos y programas especializados de alta calidad 
+                desde cualquier lugar.
+            </p>
+            <br>
+            <table>
+                <thead><tr><th>Curso</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                <tr><td>Curso individual</td><td>Desde $39</td></tr>
+                <tr><td>Especialización</td><td>Desde $49/mes</td></tr>
+                <tr><td>Certificación profesional</td><td>$39–$99/mes</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://www.coursera.org" target="_blank"rel="noopener noreferrer">Ir a Coursera</a>
+            </li>
+              
+            <li>
+            <h3>Quizlet</h3>
+            <img src="img/ias/quizlet.jpg" alt="Quizlet" class="logo-small" />
+            <p>
+                Quizlet es una herramienta de estudio que emplea IA para generar tarjetas 
+                de memoria, cuestionarios, juegos interactivos y guías de aprendizaje 
+                personalizadas. Es ampliamente utilizada por estudiantes y docentes para 
+                repasar conceptos en múltiples disciplinas, con recomendaciones inteligentes
+                 basadas en el rendimiento.
+            </p>
+            <br>
+            <table>
+                <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                <tr><td>Gratis</td><td>Gratis</td></tr>
+                <tr><td>Quizlet Plus</td><td>$7.99/mes</td></tr>
+                <tr><td>Quizlet para profesores</td><td>$35.99/año</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://quizlet.com" target="_blank"rel="noopener noreferrer">Ir a Quizlet</a>
+            </li>
+            
+            <li>
+            <h3>Socratic by Google</h3>
+            <img src="img/ias/socratic.jpg" alt="Socratic by Google" class="logo-small" />
+            <p>
+                Socratic es una aplicación educativa desarrollada por Google que utiliza 
+                IA para ayudar a los estudiantes a resolver preguntas académicas mediante 
+                imágenes, texto o voz. Ofrece explicaciones detalladas, recursos visuales y 
+                enlaces confiables para temas como matemáticas, historia, ciencias y más, 
+                facilitando el autoaprendizaje.
+            </p>
+            <br>
+            <table>
+                <thead><tr><th>Plataforma</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                <tr><td>Android / iOS</td><td>Gratis</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://socratic.org" target="_blank"rel="noopener noreferrer">Ir a Socratic</a>
+            </li>
+            <li>
+            <h3>Brinly</h3>
+            <img src="img/ias/brainly.jpg" alt="Brinly" class="logo-small" />
+            <p>
+                Brainly es una inteligencia artificial diseñada para ser un tutor educativo 
+                personalizado. Utiliza IA para adaptarse a las necesidades específicas de 
+                cada estudiante, ayudando en temas como matemáticas, ciencias, lenguaje y 
+                más. Ofrece explicaciones detalladas, prácticas interactivas y seguimiento 
+                del progreso, haciendo que el aprendizaje sea más accesible, personalizado 
+                y eficiente tanto para estudiantes como para profesores.
+            </p>
+            <table>
+                <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                <tr><td>Acceso básico</td><td>Gratis</td></tr>
+                <tr><td>Brinly Plus</td><td>$9.99/mes</td></tr>
+                <tr><td>Plan educativo para escuelas</td><td>Consultar</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://www.brainly.lat" target="_blank"rel="noopener noreferrer">Ir a Brainly</a>
+            </li>
+                            
+        </ol>
+    </section>
+    
+    <!-- Sección Herramientas de Programación -->
+    <section>
+        <h3>° HERRAMIENTAS DE PROGRAMACIÓN 💻:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/programacion.jpg" alt="Herramientas de Programación IA" />
+            <img src="img/ai/robot1.png" alt="Herramientas de Programación IA" />
+            <p>
+                Las herramientas IA para programación ayudan a escribir, corregir, completar y optimizar código automáticamente.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>ChatGPT</h3>
+                <img src="img/ias/chatgpt.jpg" alt="ChatGPT" class="logo-small"/>
+                <p>
+                    ChatGPT es un modelo de lenguaje desarrollado por OpenAI que utiliza 
+                    aprendizaje profundo para generar texto de manera conversacional. Es 
+                    ampliamente utilizado como asistente de codificación, redacción, 
+                    análisis y automatización de tareas. Su versión Pro ofrece acceso a 
+                    modelos más avanzados y rápidos.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio 💳💰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GPT-3.5</td><td>Gratis</td></tr>
+                        <tr><td>ChatGPT Plus</td><td>$20/mes</td></tr>
+                        <tr><td>ChatGPT Pro</td><td>$200/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://chat.openai.com/" target="_blank"rel="noopener noreferrer">Ir a ChatGPT</a>
+            </li>
+            <li>
+                <h3>Claude</h3>
+                <img src="img/ias/claude.jpg" alt="Claude" class="logo-small"/>
+                <p>
+                    Claude es una avanzada inteligencia artificial diseñada para asistir en programación y desarrollo de software. 
+                    Ofrece generación de código, depuración, explicación de funciones y soporte en múltiples lenguajes de programación. 
+                    Su capacidad para entender contextos complejos la convierte en una de las mejores herramientas para desarrolladores que buscan 
+                    optimizar su flujo de trabajo y resolver problemas rápidamente.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Claude Básico</td><td>Gratis</td></tr>
+                    <tr><td>Claude Pro</td><td>$30/mes</td></tr>
+                    <tr><td>Claude Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.anthropic.com/claude" target="_blank" rel="noopener noreferrer">Ir a Claude</a></p>
+            </li>
+            <li>
+                <h3>Venice AI</h3>
+                <img src="img/ias/venice.jpg" alt="Venice AI" class="logo-small"/>
+                <p>
+                    Venice AI también funciona como asistente de programación, permitiendo escribir, depurar y explicar código en diversos lenguajes 
+                    como Python, JavaScript, C++, entre otros. Todo el procesamiento se realiza en el navegador, lo que garantiza una experiencia segura, 
+                    rápida y privada. Es ideal para desarrolladores que buscan una herramienta ágil y potente sin depender de servidores externos.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Producto</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Venice Code Gratis</td><td>Gratis</td></tr>
+                    <tr><td>Venice Code Pro</td><td>$15/mes</td></tr>
+                    <tr><td>Venice Code Empresarial</td><td>Personalizado</td></tr>
+                </table>
+                <br>
+                <p><a href="https://venice.ai/code-generation" target="_blank" rel="noopener noreferrer">Ir a Venice AI</a></p>
+            </li>
+            
+            <li>
+                <h3>GitHub Copilot</h3>
+                <img src="img/ias/github.png" alt="GitHub Copilot" class="logo-small"/>
+                <p>
+                    GitHub Copilot, desarrollado por GitHub y OpenAI, es un asistente de 
+                    programación basado en inteligencia artificial que sugiere código 
+                    en tiempo real desde el editor. Es compatible con varios lenguajes 
+                    y ayuda a mejorar la productividad del desarrollador al autocompletar 
+                    funciones y bloques de código.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Copilot Individual</td><td>$10/mes</td></tr>
+                        <tr><td>Copilot Business</td><td>$19/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://github.com/features/copilot" target="_blank"rel="noopener noreferrer">Ir a GitHub Copilot</a>
+            </li>
+            
+            <li>
+                <h3>Microsoft Copilot</h3>
+                <img src="img/ias/microsoft_copilot.png" alt="Microsoft Copilot" class="logo-small"/>
+                <p>
+                    Microsoft Copilot es una suite de inteligencia artificial integrada en productos 
+                    como Word, Excel y otras herramientas de Microsoft 365. Utiliza modelos avanzados 
+                    para asistir en escritura, análisis de datos y automatización, ayudando a mejorar 
+                    la eficiencia laboral.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Copilot Pro</td><td>$20/mes</td></tr>
+                        <tr><td>Copilot Empresarial</td><td>$30+/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://www.microsoft.com/es-es/microsoft-365/copilot" target="_blank"rel="noopener noreferrer"rel="noopener noreferrer">Ir a Microsoft Copilot</a>
+            </li>
+            
+            <li>
+                <h3>Tabnine</h3>
+                <img src="img/ias/tabnine.webp" alt="Tabnine" class="logo-small"/>
+                <p>
+                    Tabnine es un asistente de codificación impulsado por IA que ofrece 
+                    autocompletado de código y sugerencias contextuales en múltiples 
+                    lenguajes de programación. Está diseñado para integrarse con los 
+                    principales IDEs y maximizar la productividad del desarrollador.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Tabnine Starter</td><td>Gratis</td></tr>
+                        <tr><td>Tabnine Pro</td><td>$12/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://www.tabnine.com/" target="_blank"rel="noopener noreferrer">Ir a Tabnine</a>
+            </li>
+            <li>
+                <h3>Bolt.new</h3>
+                <img src="img/ias/bolt.jpg" alt="Bolt.new" class="logo-small"/>
+                <p>
+                    Bolt.new es una plataforma de desarrollo web impulsada por inteligencia artificial que permite crear, editar y desplegar aplicaciones web completas directamente desde el navegador. 
+                    Utiliza modelos avanzados de IA para generar código a partir de descripciones en lenguaje natural, facilitando la creación de aplicaciones sin necesidad de configuraciones locales. 
+                    Es compatible con frameworks populares como React, Vue, Svelte, Astro, Next.js, entre otros, y permite la integración con servicios como Netlify para un despliegue sencillo.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Gratuito</td><td>Gratis</td></tr>
+                </table>
+                <br>
+                <p><a href="https://bolt.new/" target="_blank" rel="noopener noreferrer">Ir a Bolt.new</a></p>
+            </li>
+            
+            <li>
+                <h3>Replit Ghostwriter</h3>
+                <img src="img/ias/replit.jpg" alt="Replit Ghostwriter" class="logo-small"/>
+                <p>
+                    Replit Ghostwriter es un asistente de programación por IA incorporado 
+                    en la plataforma Replit. Proporciona sugerencias de código, depuración 
+                    y generación automática de scripts para múltiples lenguajes, todo en un 
+                    entorno colaborativo en línea.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Suscripción</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ghostwriter</td><td>$10-20/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://replit.com/site/ghostwriter" target="_blank"rel="noopener noreferrer">Ir a Replit Ghostwriter</a>
+            </li>
+            
+            <li>
+                <h3>Codeium</h3>
+                <img src="img/ias/codeium.jpg" alt="Codeium" class="logo-small"/>
+                <p>
+                    Codeium es una herramienta de programación basada en IA que proporciona 
+                    autocompletado de código, búsqueda semántica y generación automática de 
+                    funciones. Es compatible con múltiples editores de código y es especialmente 
+                    valorada por su velocidad y precisión.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Gratuito</td><td>Gratis</td></tr>
+                        <tr><td>Empresarial</td><td>A consultar</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://codeium.com/" target="_blank"rel="noopener noreferrer">Ir a Codeium</a>
+            </li>
+            
+            <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI" class="logo-small"/>
+                <p>
+                    Qwen AI es un modelo de lenguaje desarrollado por Alibaba que destaca por su 
+                    rendimiento en tareas de procesamiento de texto, traducción, asistencia 
+                    programática y generación de código. Está optimizado para entornos empresariales 
+                    y de investigación, y puede utilizarse en múltiples idiomas y contextos.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Qwen</td><td>Gratis</td></tr>
+                        <tr><td>Qwen Empresarial</td><td>A consultar</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://qwen.aliyun.com/" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+            </li>
+            
+            <li>
+                <h3>DeepSeek</h3>
+                <img src="img/ias/deepseek.jpg" alt="DeepSeek" class="logo-small"/>
+                <p>
+                    DeepSeek es un modelo de lenguaje enfocado en asistencia técnica, capaz de 
+                    generar, revisar y optimizar código. Utiliza un modelo de IA potente que permite 
+                    resolver problemas de programación complejos y se adapta tanto a estudiantes como 
+                    a desarrolladores avanzados.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>DeepSeek Gratis</td><td>Gratis</td></tr>
+                        <tr><td>DeepSeek Premium</td><td>$10-30/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://deepseek.com/" target="_blank"rel="noopener noreferrer">Ir a DeepSeek</a>
+            </li>
+            
+        </ol>
+    </section>
+    
+    <!-- Sección Asistentes Personales IA -->
+    <section>
+        <h3>° ASISTENTES PERSONALES IA 🤖:</h3>
+        <div class="text-img-left">
+            <img src="img/ai/asistent.jpg" alt="Asistentes Personales IA" />
+            <img src="img/ai/asistente.webp" alt="Asistentes Personales IA" />
+            
+            <p>
+                Los asistentes personales IA gestionan tareas diarias, responden preguntas, 
+                organizan calendarios y ayudan con automatización personal.
+            </p>
+        </div>
+        <ol style="max-width: 900px; margin: 2em auto;">
+            <li>
+                <h3>ChatGPT</h3>
+                <img src="img/ias/chatgpt.jpg" alt="ChatGPT" class="logo-small"/>
+                <p>
+                  ChatGPT de OpenAI es un asistente conversacional basado en inteligencia 
+                  artificial que puede responder preguntas, generar texto, asistir con 
+                  programación, redactar correos, traducir idiomas y más. Su capacidad 
+                  para adaptarse al contexto lo convierte en uno de los asistentes personales 
+                  más potentes disponibles.
+                </p>
+                <br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio 💳💰</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>GPT-3.5</td><td>Gratis</td></tr>
+                        <tr><td>ChatGPT Plus</td><td>$20/mes</td></tr>
+                        <tr><td>ChatGPT Pro</td><td>$200/mes</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://chat.openai.com/" target="_blank"rel="noopener noreferrer">Ir a ChatGPT</a>
+              </li>
+              <li>
+                <h3>Qwen AI</h3>
+                <img src="img/ias/qwen.png" alt="Qwen AI Personal Assistant" class="logo-small"/>
+                <p>
+                    Qwen AI actúa como un asistente personal inteligente, capaz de organizar 
+                    tareas, redactar correos, programar reuniones y ayudarte con búsquedas 
+                    complejas mediante lenguaje natural, brindando soporte diario 
+                    personalizado.
+                </p>
+                <br>
+                <table>
+                    <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+                    <tbody>
+                        <tr><td>Qwen</td><td>Gratis</td></tr>
+                        <tr><td>Asistente Empresarial</td><td>A consultar</td></tr>
+                    </tbody>
+                </table>
+                <br><a href="https://qwen.aliyun.com" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+            </li>
+            
+              <li>
+                <h3>Google Assistant</h3>
+                <img src="img/ias/googleassistant.jpg" alt="Google Assistant" class="logo-small"/>
+                <p>
+                  Google Assistant es el asistente de voz de Google, capaz de realizar 
+                  búsquedas, gestionar tareas, controlar dispositivos del hogar inteligente 
+                  y proporcionar información personalizada. Se encuentra integrado en Android, 
+                  Google Home y otros productos del ecosistema Google.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Acceso</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Dispositivos Google</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://assistant.google.com/" target="_blank"rel="noopener noreferrer">Ir a Google Assistant</a>
+              </li>
+          
+              <li>
+                <h3>Gemini</h3>
+                <img src="img/ias/gemini.png" alt="Gemini" class="logo-small"/>
+                <p>
+                  Gemini, el asistente basado en IA de Google, integra capacidades conversacionales 
+                  avanzadas con funcionalidades de productividad, navegación web, comprensión 
+                  de imágenes y documentos. Está disponible en Android y dispositivos Google Pixel.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Acceso</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Android / Web</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://gemini.google.com/" target="_blank"rel="noopener noreferrer">Ir a Gemini</a>
+              </li>
+          
+              <li>
+                <h3>Amazon Alexa</h3>
+                <img src="img/ias/alexa.jpg" alt="Amazon Alexa" class="logo-small"/>
+                <p>
+                  Alexa es el asistente de voz de Amazon, diseñado para interactuar con 
+                  los usuarios a través de comandos de voz, controlar dispositivos inteligentes, 
+                  reproducir música, responder preguntas, configurar alarmas y más.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Dispositivo</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Echo Dot / App Alexa</td><td>Gratis (con dispositivo)</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.amazon.com/alexa" target="_blank"rel="noopener noreferrer">Ir a Alexa</a>
+              </li>
+          
+              <li>
+                <h3>Microsoft Cortana</h3>
+                <img src="img/ias/cortana.jpg" alt="Cortana" class="logo-small"/>
+                <p>
+                  Cortana es el asistente virtual de Microsoft diseñado para integrarse con 
+                  Windows. Aunque ha sido descontinuado en algunas plataformas, aún ofrece 
+                  funciones básicas de productividad y navegación para usuarios de Microsoft 365.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Disponibilidad</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Windows 10/11</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.microsoft.com/en-us/cortana" target="_blank"rel="noopener noreferrer">Ir a Cortana</a>
+              </li>
+              <li>
+                <h3>Perplexity AI</h3>
+                <img src="img/ias/perplexity.jpg" alt="Perplexity AI" class="logo-small"/>
+                <p>
+                    Perplexity AI es un asistente personal impulsado por inteligencia artificial que 
+                    responde a preguntas complejas con información precisa y confiable. Utiliza modelos
+                    avanzados para entender tus consultas y ofrecer respuestas claras, rápidas y fundamentadas,
+                    facilitando la toma de decisiones y el acceso a conocimiento actualizado en tiempo real, destacada 
+                    por tener acceso a muchas aplicaciones de los dispositivos iOS, puede ajendar eventos.
+                </p>
+                <br>
+                <br>
+                <table>
+                    <tr><th>Plan</th><th>Precio 💳💰</th></tr>
+                    <tr><td>Estándar</td><td>Gratis</td></tr>
+                    <tr><td>Profesional</td><td>$20/mes</td></tr>
+                    <tr><td>Enterprise Pro</td><td>$40/mes</td></tr>
+                </table>
+                <br>
+                <p><a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer">Ir a Perplexity AI</a></p>
+            </li>
+              <li>
+                <h3>Siri</h3>
+                <img src="img/ias/siri.jpg" alt="Siri" class="logo-small"/>
+                <p>
+                  Siri es el asistente personal de Apple disponible en todos sus dispositivos. 
+                  Ofrece funcionalidades de búsqueda, control de dispositivos, dictado, navegación, 
+                  recordatorios, entre otros, integrándose con el ecosistema de Apple.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Dispositivo</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>iPhone / Mac / iPad</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.apple.com/siri/" target="_blank"rel="noopener noreferrer">Ir a Siri</a>
+              </li>
+          
+              <li>
+                <h3>LuzIA</h3>
+                <img src="img/ias/luzia.jpg" alt="LuzIA" class="logo-small"/>
+                <p>
+                  LuzIA es un asistente por WhatsApp que permite enviar notas de voz, 
+                  traducir textos, generar ideas, redactar contenido y realizar consultas 
+                  mediante IA de forma natural. Ideal para usuarios móviles que buscan una 
+                  IA accesible desde su app de mensajería.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Acceso</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>WhatsApp</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://www.luzia.com/" target="_blank"rel="noopener noreferrer">Ir a LuzIA</a>
+              </li>
+          
+              <li>
+                <h3>Meta AI</h3>
+                <img src="img/ias/meta.jpg" alt="Meta AI" class="logo-small"/>
+                <p>
+                  Meta AI es el asistente de inteligencia artificial creado por Meta (Facebook), 
+                  que integra capacidades de conversación, generación de texto, imágenes y ayuda 
+                  en redes sociales. Está en constante expansión y se encuentra dentro de plataformas 
+                  como WhatsApp e Instagram.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Acceso</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Redes Meta</td><td>Gratis</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://meta.ai/" target="_blank"rel="noopener noreferrer">Ir a Meta AI</a>
+              </li>
+          
+              <li>
+                <h3>Zapia</h3>
+                <img src="img/ias/zapia.jpg" alt="Zapia" class="logo-small"/>
+                <p>
+                  Zapia es un asistente basado en IA enfocado en automatización de tareas 
+                  cotidianas, gestión de flujos de trabajo y productividad personal. Combina 
+                  capacidades de chatbot con integraciones a plataformas como Slack y Notion.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Básico</td><td>Gratis</td></tr>
+                    <tr><td>Premium</td><td>$9/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://zapia.com/" target="_blank"rel="noopener noreferrer">Ir a Zapia</a>
+              </li>
+          
+              <li>
+                <h3>Monica</h3>
+                <img src="img/ias/monica.jpg" alt="Monica" class="logo-small"/>
+                <p>
+                  Monica es un asistente de inteligencia artificial que funciona como extensión 
+                  para navegadores. Permite redactar correos, resumir artículos, traducir texto, 
+                  generar imágenes y más, directamente desde cualquier sitio web.
+                </p>
+                <br>
+                <table>
+                  <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+                  <tbody>
+                    <tr><td>Gratis</td><td>Gratis</td></tr>
+                    <tr><td>Premium</td><td>$8/mes</td></tr>
+                  </tbody>
+                </table>
+                <br><a href="https://monica.im/" target="_blank"rel="noopener noreferrer">Ir a Monica</a>
+              </li>
+        </ol>
+    </section>
+    
+    <!-- Sección IA de Idiomas -->
+<section>
+    <h3>° IA DE IDIOMAS 🌐:</h3>
+    <div class="text-img-left">
+        <img src="img/ai/idiomas.jpg" alt="IA de idiomas" />
+        <img src="img/ai/idiomas2.jpg" alt="IA de idiomas" />
+        <p>
+            Las IA de idiomas ofrecen asistencia avanzada para el aprendizaje y práctica de nuevas lenguas mediante reconocimiento de voz, traducción automática, y tutorías personalizadas.
+        </p>
+    </div>
+    <ol style="max-width: 900px; margin: 2em auto;">
+        <li>
+            <h3>Duolingo</h3>
+            <img src="img/ias/Duolingo.jpg" alt="Duolingo" class="logo-small" />
+            <p>
+                Duolingo es una plataforma de aprendizaje de idiomas considerada 
+                una de las mejores en la enseñanza de idiomas basada en 
+                juegos, ideal para principiantes. Ofrece ejercicios interactivos,
+                seguimiento de progreso y recompensas. Cubre muchos idiomas y es 
+                gratuito, aunque ofrece funciones avanzadas en su versión Plus y Max.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio individual💳💰</th><th>Plan familiar💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td><img src="img/ai/duolingo.jpg" alt="Duolinog" class="logo-small" />Duolingo Básico</td><td>Gratis</td><td>Gratis</td></tr>
+                    <tr><td><img src="img/ai/duolingosuper.jpg" alt="Duolingo" class="logo-small" />Duolingo Super</td><td>$4.85/mes</td><td>$6.95/mes</td></tr>
+                    <tr><td><img src="img/ai/duolingomax.jpg" alt="Duolingo" class="logo-small" />Duolingo Super</td><td>$8.44/mes</td><td>$12.06/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://www.duolingo.com" target="_blank"rel="noopener noreferrer">Ir a Duolingo</a>
+        </li>
+        
+        <li>
+            <h3>ChatGPT</h3>
+            <img src="img/ias/chatgpt.jpg" alt="ChatGPT" class="logo-small" />
+            <p>
+                ChatGPT puede actuar como tutor conversacional para practicar 
+                idiomas. Permite hablar en distintos idiomas, corregir gramática,
+                traducir frases y mejorar vocabulario. Es una herramienta versátil 
+                para aprender escribiendo y conversando.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio 💳💰</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>GPT-3.5</td><td>Gratis</td></tr>
+                    <tr><td>ChatGPT Plus</td><td>$20/mes</td></tr>
+                    <tr><td>ChatGPT Pro</td><td>$200/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://chat.openai.com" target="_blank"rel="noopener noreferrer">Ir a ChatGPT</a>
+        </li>
+        <li>
+            <h3>Qwen AI - Aprendizaje de Idiomas</h3>
+            <img src="img/ias/qwen.png" alt="Qwen AI Idiomas" class="logo-small"/>
+            <p>
+                Qwen AI puede ayudarte a aprender idiomas gracias a su comprensión 
+                semántica, traducción en tiempo real, generación de conversaciones y 
+                corrección gramatical contextual en múltiples lenguas.
+            </p>
+            <table>
+                <thead><tr><th>Función</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>Qwen</td><td>Gratis</td></tr>
+                </tbody>
+            </table>
+            <br><a href="https://qwen.aliyun.com" target="_blank"rel="noopener noreferrer">Ir a Qwen AI</a>
+        </li>
+        
+        <li>
+            <h3>TutorGPT</h3>
+            <img src="img/ias/tutorgpt.jpg" alt="TutorGPT" class="logo-small" />
+            <p>
+                TutorGPT es una IA especializada en ofrecer clases personalizadas 
+                para aprender idiomas. Se adapta al nivel del usuario y ofrece
+                lecciones, correcciones y ejercicios prácticos. Ideal para 
+                estudiantes autodidactas.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>TutorGPT Gratis</td><td>Gratis</td></tr>
+                    <tr><td>TutorGPT Pro</td><td>$9.99/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://tutorgpt.io" target="_blank"rel="noopener noreferrer">Ir a TutorGPT</a>
+        </li>
+        
+        <li>
+            <h3>Loecsen</h3>
+            <img src="img/ias/loecsen.jpg" alt="Loecsen" class="logo-small" />
+            <p>
+                Loecsen es una herramienta en línea que ofrece frases útiles con 
+                audio nativo en varios idiomas. Es ideal para viajeros o quienes
+                desean aprender frases cotidianas de forma rápida.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>Loecsen Acceso Básico</td><td>Gratis</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://www.loecsen.com" target="_blank"rel="noopener noreferrer">Ir a Loecsen</a>
+        </li>
+        
+        <li>
+            <h3>Character.AI</h3>
+            <img src="img/ias/character.jpg" alt="Character AI" class="logo-small" />
+            <p>
+                Character.AI permite interactuar con personajes ficticios y reales 
+                para practicar conversación en distintos idiomas. Cada personaje
+                tiene su propio estilo de habla, lo que brinda una experiencia 
+                variada y entretenida.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>Character.AI Básico</td><td>Gratis</td></tr>
+                    <tr><td>Character.AI Plus</td><td>$9.99/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://beta.character.ai" target="_blank"rel="noopener noreferrer">Ir a Character.AI</a>
+        </li>
+        
+        <li>
+            <h3>Talkpal</h3>
+            <img src="img/ias/talkpal.jpg" alt="Talkpal" class="logo-small" />
+            <p>
+                Talkpal es una IA conversacional que permite hablar con un asistente 
+                en diferentes idiomas. Brinda retroalimentación sobre gramática,
+                pronunciación y vocabulario. Es ideal para mejorar la fluidez oral.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>Talkpal Free</td><td>Gratis</td></tr>
+                    <tr><td>Talkpal Premium</td><td>$8.99/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://talkpal.ai" target="_blank"rel="noopener noreferrer">Ir a Talkpal</a>
+        </li>
+        
+        <li>
+            <h3>LipSurf</h3>
+            <img src="img/ias/lipsurf.jpg" alt="LipSurf" class="logo-small" />
+            <p>
+                LipSurf es una extensión de navegador que permite controlar el 
+                navegador con la voz y practicar idiomas mediante comandos hablados.
+                Es útil para usuarios que desean mejorar su pronunciación o aprender 
+                idiomas mientras navegan.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>LipSurf Gratuito</td><td>Gratis</td></tr>
+                    <tr><td>LipSurf Premium</td><td>$4.99/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://www.lipsurf.com" target="_blank"rel="noopener noreferrer">Ir a LipSurf</a>
+        </li>
+        
+        <li>
+            <h3>LingQ</h3>
+            <img src="img/ias/lingq.jpg" alt="LingQ" class="logo-small" />
+            <p>
+                LingQ ofrece una gran variedad de contenido real (como artículos, 
+                videos, podcasts) para aprender idiomas en contexto. Permite
+                traducir, guardar vocabulario y seguir el progreso del estudiante 
+                de forma personalizada.
+            </p>
+            <table>
+                <thead><tr><th>Producto</th><th>Precio 💳💰</th></tr></thead>
+                <tbody>
+                    <tr><td>LingQ Free</td><td>Gratis</td></tr>
+                    <tr><td>LingQ Premium</td><td>$12.99/mes</td></tr>
+                </tbody>
+            </table>
+            <br>
+            <a href="https://www.lingq.com" target="_blank"rel="noopener noreferrer">Ir a LingQ</a>
+        </li>
+        <li>
+            <h3>Busuu</h3>
+            <img src="img/ias/busuu.jpg" alt="Busuu" class="logo-small" />
+            <p>
+              Busuu es una aplicación para aprender idiomas mediante lecciones interactivas, 
+              ejercicios de gramática y correcciones por hablantes nativos. Ofrece planes 
+              estructurados para varios niveles y más de 10 idiomas.
+            </p>
+            <table>
+              <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Gratis</td><td>$0</td></tr>
+                <tr><td>Premium</td><td>$6.66/mes</td></tr>
+                <tr><td>Premium Plus</td><td>$13.32/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.busuu.com" target="_blank"rel="noopener noreferrer">Ir a Busuu</a>
+          </li>
+          
+          <li>
+            <h3>ELSA Speak</h3>
+            <img src="img/ias/elsa.jpg" alt="ELSA Speak" class="logo-small" />
+            <p>
+              ELSA Speak es una app diseñada para mejorar la pronunciación del inglés 
+              mediante inteligencia artificial. Proporciona retroalimentación precisa y 
+              ejercicios personalizados basados en fonética y acento.
+            </p>
+            <table>
+              <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Básico</td><td>$0</td></tr>
+                <tr><td>Pro</td><td>$11.99/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.elsaspeak.com" target="_blank"rel="noopener noreferrer">Ir a ELSA Speak</a>
+          </li>
+          
+          <li>
+            <h3>DeepL</h3>
+            <img src="img/ias/deepl.jpg" alt="DeepL" class="logo-small" />
+            <p>
+              DeepL es un traductor basado en IA altamente preciso y fluido, utilizado 
+              tanto por individuos como por empresas. Soporta múltiples idiomas y ofrece 
+              traducciones contextuales avanzadas.
+            </p>
+            <table>
+              <thead><tr><th>Versión</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Gratis</td><td>$0</td></tr>
+                <tr><td>Starter</td><td>$8.74/mes</td></tr>
+                <tr><td>Advanced</td><td>$17.49/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.deepl.com" target="_blank"rel="noopener noreferrer">Ir a DeepL</a>
+          </li>
+          
+          <li>
+            <h3>Google Translate</h3>
+            <img src="img/ias/googletranslate.jpg" alt="Google Translate" class="logo-small" />
+            <p>
+              Google Translate es un traductor multilingüe gratuito que utiliza redes 
+              neuronales para ofrecer traducciones automáticas de texto, voz, imágenes 
+              y sitios web en más de 100 idiomas.
+            </p>
+            <table>
+              <thead><tr><th>Servicio</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Web / App</td><td>Gratis</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://translate.google.com" target="_blank"rel="noopener noreferrer">Ir a Google Translate</a>
+          </li>
+          
+          <li>
+            <h3>Learma</h3>
+            <img src="img/ias/learma.jpg" alt="Learma" class="logo-small" />
+            <p>
+              Learma es una plataforma de aprendizaje de idiomas con tecnología de IA 
+              que adapta el contenido a tu progreso. Integra conversaciones simuladas, 
+              ejercicios auditivos y recomendaciones personalizadas.
+            </p>
+            <table>
+              <thead><tr><th>Plan</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Acceso Básico</td><td>Gratis</td></tr>
+                <tr><td>Suscripción Premium</td><td>$14.99/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.learma.ai" target="_blank"rel="noopener noreferrer">Ir a Learma</a>
+          </li>
+          
+          <li>
+            <h3>Lucida</h3>
+            <img src="img/ias/lucida.jpg" alt="Lucida" class="logo-small" />
+            <p>
+              Lucida es un asistente de idiomas potenciado por IA que ayuda a los usuarios 
+              a practicar conversación, pronunciación y comprensión escrita. Se enfoca en 
+              ofrecer retroalimentación inteligente y contenido adaptado.
+            </p>
+            <table>
+              <thead><tr><th>Tipo</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Gratis</td><td>$0</td></tr>
+                <tr><td>Lucida Pro</td><td>$9.99/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.lucida.ai" target="_blank"rel="noopener noreferrer">Ir a Lucida</a>
+          </li>
+          
+          <li>
+            <h3>Hallo</h3>
+            <img src="img/ias/hallo.jpg" alt="Hallo" class="logo-small" />
+            <p>
+              Hallo es una app que permite practicar inglés conversacional en tiempo real 
+              con hablantes nativos o tutores. Ofrece clases en vivo, prácticas guiadas 
+              por IA y tutorías privadas.
+            </p>
+            <table>
+              <thead><tr><th>Suscripción</th><th>Precio 💳💰</th></tr></thead>
+              <tbody>
+                <tr><td>Gratis</td><td>$0</td></tr>
+                <tr><td>Premium</td><td>$9.99/mes</td></tr>
+              </tbody>
+            </table>
+            <br><a href="https://www.hallo.ai" target="_blank"rel="noopener noreferrer">Ir a Hallo</a>
+          </li>
+    </ol>
+</section>
+<script>
+    function filtrarIA() {
+      const filtro = document.getElementById("buscadorIA").value.toLowerCase();
+      const secciones = document.querySelectorAll("section");
+    
+      secciones.forEach(seccion => {
+        const items = seccion.querySelectorAll("li");
+        let seccionVisible = false;
+    
+        items.forEach(item => {
+          const texto = item.textContent.toLowerCase();
+          const coincide = texto.includes(filtro);
+          item.style.display = coincide ? "" : "none";
+          if (coincide) seccionVisible = true;
+        });
+    
+        // Muestra u oculta la sección según si tiene coincidencias
+        seccion.style.display = seccionVisible ? "" : "none";
+      });
+    }
+    </script>
+    
+<hr>
+    <!--Mensaje y borde colorido -->
+<div class="mensaje-final">
+    <p>El límite está en tu mente. Descubre, aprende y transforma con Inteligencia Artificial.</p>
+  </div>
+  
+  <style>
+    .mensaje-final {
+      margin: 40px auto 20px;
+      max-width: 700px;
+      padding: 25px 40px;
+      position: relative;
+      color: #00ffc6;  /* Letras verde-turquesa */
+      font-size: 200px; /* Doble tamaño */
+      font-weight: 700;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: default;
+      background: transparent;
+      box-shadow: 0 0 15px rgba(0, 255, 198, 0.6);
+      z-index: 1;
+    }
+  
+    /*Borde animado*/
+    .mensaje-final::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        270deg,
+        #00ffc6,
+        #0066ff,
+        #ff00ff,
+        #ff6600,
+        #00ffc6
+      );
+      background-size: 1000% 1000%;
+      animation: bordeAnimacion 15s linear infinite;
+      z-index: 0;
+      border-radius: 25px;
+    }
+    .mensaje-final::after {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      background: #000000; /*Fondo*/
+      border-radius: 16px;
+      z-index: 1;/*entre borde y texto*/
+    }
+    /* El texto queda por encima por defecto, z-index: 2 */
+    .mensaje-final p {
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes bordeAnimacion {
+      0% {
+        background-position: 0% 50%;
+        transform: rotate(0deg);
+      }
+      50% {
+        background-position: 100% 50%;
+        transform: rotate(10deg);
+      }
+      100% {
+        background-position: 0% 50%;
+        transform: rotate(0deg);
+      }
+    }
+    </style>
+    <footer style="background-color: #0e0b31; color: #cbd5e1; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+      
+          <!-- Logo y Nombre -->
+          <div style="flex: 1 1 200px; margin-bottom: 20px;">
+            <h2 style="font-size: 24px; margin: 0; color: #ffffff;">X-cano</h2>
+            <p style="margin-top: 8px; font-size: 14px; color: #94a3b8;">Soluciones inteligentes impulsadas por IA.</p>
+          </div>
+      
+          <!-- Contacto -->
+          <div style="flex: 1 1 200px; margin-bottom: 20px;">
+            <h3 style="font-size: 16px; margin-bottom: 8px; color: #e2e8f0;">Contacto</h3>
+            <p style="margin: 0; font-size: 14px;">Email:
+              <a href="mailto:xcano2025@gmail.com" style="color: #94a3b8; text-decoration: none;">xcano2025@gmail.com</a>
+            </p>
+          </div>
+      
+          <!-- Redes sociales -->
+          <div style="flex: 1 1 200px; margin-bottom: 20px;">
+            <h3 style="font-size: 16px; margin-bottom: 8px; color: #e2e8f0;">Síguenos</h3>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <!-- Facebook -->
+              <a href="https://www.facebook.com/XcanoDigitalAI" target="_blank" style="display: inline-flex; align-items: center; color: #94a3b8; text-decoration: none;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Facebook-icon-1.png" alt="Facebook" style="width: 18px; height: 18px; margin-right: 6px;">
+                Facebook
+              </a>
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/x_cano.digital" target="_blank" style="display: inline-flex; align-items: center; color: #94a3b8; text-decoration: none;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 18px; height: 18px; margin-right: 6px;">
+                Instagram
+              </a>
+              <!-- TikTok -->
+              <a href="https://www.tiktok.com/@xcano.digital?_t=ZM-8wxlgFn3FRd&_r=1" target="_blank" style="display: inline-flex; align-items: center; color: #94a3b8; text-decoration: none;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046123.png" alt="TikTok" style="width: 18px; height: 18px; margin-right: 6px;">
+                TikTok
+              </a>
+            </div>
+          </div>
+      
+        </div>
+      
+        <hr style="border-color: #334155; margin: 30px 0;" />
+      
+        <div style="text-align: center; font-size: 13px; color: #64748b;">
+          © 2025 X-cano. Todos los derechos reservados.
+        </div>
+      </footer>
+      
+  
+  
+</body>
+</html>
