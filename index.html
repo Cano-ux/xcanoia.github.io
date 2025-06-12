@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <title>X-cano Herramientas de Inteligencia Artificial</title>
     <style>
         /* Reset y base */
@@ -215,6 +215,40 @@
             color: #aaa;
             font-size: 0.9rem;
             border-top: 1px solid #fffbfb;
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px 5px; /* reduce padding en móviles */
+            }
+            p, ul, ol {
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .text-img-left p {
+                width: 100%; /*texto ocupa todo el ancho*/
+            }
+            table {
+                max-width: 100% !important;
+                font-size: 0.85rem; /*texto de tabla un poco más pequeño*/
+            }
+            th, td {
+                padding: 6px 8px; /*reduce padding en celdas para que quepa*/
+            }
+            .header-images {
+                gap: 20px;
+                justify-content: center;
+            }
+            .header-images img {
+                width: 100px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
         }
     </style>
 </head>
